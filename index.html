@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gjeometria ne Arkitekture | Kurt Babasi</title>
+  <style>
+    :root{
+      --navy:#11213b;
+      --blue:#2853b8;
+      --sand:#f7efe1;
+      --amber:#c77f18;
+      --card:#ffffff;
+      --text:#16263f;
+      --muted:#5a6780;
+      --line:#d8e1ef;
+      --shadow:0 18px 44px rgba(17, 33, 59, 0.12);
+      --radius:24px;
+      --max:1280px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:Georgia, "Times New Roman", serif;
+      line-height:1.65;
+      background:
+        radial-gradient(circle at top left, rgba(199,127,24,.1), transparent 23%),
+        radial-gradient(circle at top right, rgba(40,83,184,.08), transparent 28%),
+        linear-gradient(180deg, #eef3ff 0%, #f8fbff 38%, #ffffff 100%);
+    }
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:auto;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(17,33,59,.94);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .nav-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:14px 0;
+    }
+
+    .brand{
+      color:#fff;
+      font-size:1.08rem;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .nav-links a{
+      color:#d9e7ff;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.94rem;
+      transition:.2s ease;
+    }
+
+    .nav-links a:hover{
+      color:#fff;
+      background:rgba(255,255,255,.12);
+    }
+
+    .hero{
+      color:#fff;
+      padding:78px 0 66px;
+      background:
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,.15), transparent 18%),
+        linear-gradient(135deg, #11213b 0%, #224aa6 55%, #2853b8 100%);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff2d6;
+      font-size:.86rem;
+      font-weight:700;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 16px;
+      font-size:clamp(2.4rem, 5vw, 4.3rem);
+      line-height:1.04;
+    }
+
+    .hero p{
+      margin:0 0 24px;
+      font-size:1.07rem;
+      color:#dce8ff;
+      max-width:760px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:14px;
+      font-weight:700;
+      transition:.2s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:var(--navy);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:30px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-card h3{
+      margin:0 0 14px;
+      font-size:1.35rem;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:14px;
+    }
+
+    .mini{
+      min-height:124px;
+      border-radius:20px;
+      background:rgba(255,255,255,.1);
+      padding:16px;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .mini .symbol{
+      font-size:1.75rem;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    section{
+      padding:68px 0;
+    }
+
+    .section-head{
+      margin-bottom:30px;
+    }
+
+    .section-title{
+      margin:0 0 10px;
+      font-size:clamp(1.8rem, 4vw, 2.7rem);
+      color:var(--navy);
+    }
+
+    .section-lead{
+      max-width:930px;
+      margin:0;
+      color:var(--muted);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.18rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .tag{
+      display:inline-block;
+      margin-top:14px;
+      padding:9px 13px;
+      border-radius:14px;
+      background:var(--sand);
+      color:#8f5b0d;
+      font-weight:700;
+      font-size:.95rem;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:20px;
+    }
+
+    .panel{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .panel h3{
+      margin-top:0;
+      font-size:1.3rem;
+    }
+
+    .bullet{
+      background:#fff;
+      border:1px solid var(--line);
+      border-left:6px solid var(--amber);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .bullet h4{
+      margin:0 0 7px;
+      font-size:1.05rem;
+    }
+
+    .bullet p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .formula-box{
+      margin-top:16px;
+      background:var(--navy);
+      color:#fff;
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .subsection{
+      margin-top:34px;
+    }
+
+    .subsection h3{
+      margin:0 0 10px;
+      font-size:1.45rem;
+    }
+
+    .subsection p{
+      margin:0 0 18px;
+      color:var(--muted);
+    }
+
+    .table-wrap{
+      overflow:auto;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th, td{
+      padding:14px 16px;
+      text-align:left;
+      vertical-align:top;
+      border-bottom:1px solid #e8eef7;
+    }
+
+    th{
+      background:#edf3ff;
+      color:#1d3f79;
+      font-size:.98rem;
+    }
+
+    td{
+      color:var(--muted);
+    }
+
+    .highlight{
+      background:linear-gradient(135deg, rgba(17,33,59,.98), rgba(40,83,184,.92));
+      color:#fff;
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .highlight h3{
+      margin-top:0;
+      font-size:1.5rem;
+    }
+
+    .highlight p,
+    .highlight li{
+      color:#dbe7ff;
+    }
+
+    .highlight ul{
+      margin:14px 0 0;
+      padding-left:18px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:18px;
+      margin-top:24px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:20px;
+      padding:16px;
+      text-align:center;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:1.55rem;
+      color:#fff;
+      margin-bottom:4px;
+    }
+
+    .interactive{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+
+    .controls{
+      display:grid;
+      gap:14px;
+    }
+
+    .control-group{
+      display:grid;
+      gap:6px;
+    }
+
+    label{
+      font-weight:700;
+      color:#223856;
+    }
+
+    input, select{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid #c7d4e4;
+      outline:none;
+      font:inherit;
+      background:#fff;
+    }
+
+    input:focus, select:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(40,83,184,.12);
+    }
+
+    .result-box{
+      margin-top:20px;
+      border-radius:18px;
+      background:#f8fafc;
+      border:1px dashed #9fb0c6;
+      padding:16px;
+    }
+
+    .result-box h4{
+      margin:0 0 10px;
+    }
+
+    .result{
+      font-weight:700;
+      font-size:1.05rem;
+      color:var(--text);
+    }
+
+    .note{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .footer{
+      margin-top:44px;
+      padding:40px 0;
+      background:var(--navy);
+      color:#d9e3f3;
+    }
+
+    .footer p{
+      margin:8px 0;
+    }
+
+    .small{
+      color:#b6c4d8;
+      font-size:.94rem;
+    }
+
+    @media (max-width: 1020px){
+      .grid-3{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 920px){
+      .hero-grid,
+      .grid-2,
+      .interactive{
+        grid-template-columns:1fr;
+      }
+
+      .nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    @media (max-width: 640px){
+      .mini-grid,
+      .grid-3,
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding-top:58px;
+      }
+
+      section{
+        padding:54px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Gjeometria ne Arkitekture</div>
+      <div class="nav-links">
+        <a href="#hyrje">Hyrje</a>
+        <a href="#bazat">Bazat</a>
+        <a href="#figurat2d">Figurat 2D</a>
+        <a href="#trupat3d">Trupat 3D</a>
+        <a href="#formula">Formula</a>
+        <a href="#arkitektura">Arkitektura</a>
+        <a href="#interaktive">Llogaritesit</a>
+        <a href="#perfundim">Perfundim</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="hyrje">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">Punuar nga Kurt Babasi</span>
+        <h1>Gjeometria ne Arkitekture</h1>
+        <p>
+          Gjeometria në arkitekturë është një element thelbësor që ndikon në mënyrën se si projektohen dhe ndërtohen hapësirat. Ajo nuk shërben vetëm për llogaritje, por edhe për të krijuar harmoni, bukuri dhe qëndrueshmëri në ndërtesa. Për ta kuptuar më mirë këtë temë, mund ta ndajmë në disa nëntema kryesore:
+          Gjeometria si bazë e projektimit arkitektonik
+          Në arkitekturë, çdo projekt fillon me forma dhe struktura gjeometrike. Arkitektët përdorin parime matematikore për të organizuar hapësirat dhe për të siguruar që ndërtesa të jetë funksionale dhe e qëndrueshme. Gjeometria ndihmon në planifikimin e çdo detaji, nga baza e ndërtesës deri te pjesët më të vogla të saj.
+          Format gjeometrike në ndërtesa
+          Shumica e ndërtesave bazohen në forma të thjeshta si katrori, drejtkëndëshi, rrethi dhe trekëndëshi. Këto forma kombinohen për të krijuar struktura më komplekse. Për shembull, trekëndëshi përdoret shpesh në struktura mbajtëse për shkak të forcës së tij, ndërsa rrethi përdoret për kupola dhe hapësira të mëdha.
+          Simetria dhe balanca
+          Simetria është një nga parimet më të rëndësishme në arkitekturë. Ajo krijon ndjenjë rregulli dhe harmonie. Kur një ndërtesë është simetrike, ajo duket më e qëndrueshme dhe më e bukur për syrin. Balanca arrihet duke shpërndarë në mënyrë të barabartë elementet në të gjithë strukturën.
+          Proporcionet dhe harmonia
+          Proporcionet lidhen me marrëdhënien midis pjesëve të ndryshme të një ndërtese. Një ndërtesë me proporcione të mira duket më estetike dhe më natyrale. Raporti i artë është një nga shembujt më të njohur që përdoret për të arritur këtë harmoni.
+          Roli i vijave dhe këndeve
+          Vijat dhe këndet ndikojnë drejtpërdrejt në pamjen dhe ndjesinë që jep një ndërtesë. Vijat vertikale japin ndjesinë e lartësisë dhe fuqisë, ndërsa vijat horizontale krijojnë stabilitet dhe qetësi. Këndet përdoren për të krijuar forma të ndryshme dhe për të ndikuar në funksionin e hapësirës.
+          Përdorimi i gjeometrisë në struktura
+          Gjeometria është shumë e rëndësishme për qëndrueshmërinë e ndërtesave. Forma si trekëndëshi ndihmojnë në shpërndarjen e forcave dhe parandalojnë shembjen. Kjo është arsyeja pse shumë ura dhe kulla përdorin struktura trekëndore.
+          Gjeometria në arkitekturën moderne
+          Në kohët moderne, arkitektët përdorin forma më të avancuara dhe më kreative. Falë teknologjisë, ata mund të krijojnë ndërtesa me forma të lakuara, asimetrike dhe futuriste. Kjo e ka bërë arkitekturën më të larmishme dhe inovative.
+          Rëndësia e gjeometrisë në arkitekturë
+          Në fund, gjeometria është ajo që lidh funksionalitetin me estetikën. Ajo ndihmon në krijimin e ndërtesave të sigurta, ekonomike dhe të bukura, duke e bërë një element të domosdoshëm në çdo projekt arkitektonik.
+        </p>
+        <h2>Personazhe te shquar qe kane kontribuar:</h2>
+        </p>
+        🏛️ Vitruvius
+        Ai ishte një nga arkitektët më të hershëm që shkroi për lidhjen midis gjeometrisë dhe arkitekturës. Në veprën e tij “De Architectura”, ai shpjegon se ndërtesat duhet të kenë simetri dhe proporcione të sakta, të bazuara në trupin e njeriut. Idetë e tij ndikuan shumë në arkitekturën klasike dhe më vonë në Rilindje.
+        🎨 Leonardo da Vinci
+        Edhe pse i njohur si artist, ai studioi thellësisht gjeometrinë. Vizatim i tij i famshëm “Njeriu Vitruvian” tregon si trupi i njeriut përshtatet brenda formave gjeometrike si rrethi dhe katrori. Kjo ide përdoret në arkitekturë për të krijuar harmoni dhe balancë.
+        📐 Euclid
+        I quajtur “babai i gjeometrisë”, ai krijoi bazat e gjeometrisë me librin “Elements”. Edhe pse nuk ishte arkitekt, parimet e tij përdoren drejtpërdrejt në ndërtim, si këndet, linjat dhe format.
+        🏗️ Filippo Brunelleschi
+        Ai përdori gjeometrinë për të zgjidhur probleme të mëdha ndërtimi, si kupola e Katedrales së Firences. Ishte ndër të parët që përdori perspektivën lineare, një koncept gjeometrik shumë i rëndësishëm për projektimin dhe vizatimin arkitektonik.
+        🧠 Le Corbusier
+        Ai krijoi sistemin “Modulor”, që bazohet në proporcione gjeometrike dhe trupin e njeriut. Ky sistem përdoret për të projektuar ndërtesa moderne me përmasa të balancuara dhe funksionale.
+        📏 Andrea Palladio
+        Ai përdori shumë forma të thjeshta gjeometrike si katrori dhe rrethi në projektet e tij. Ndërtesat e tij janë shembuj perfekt të harmonisë dhe simetrisë.
+        <p>
+        <img src="image1.jpg"/>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#figurat2d">Shiko figurat</a>
+          <a class="btn btn-secondary" href="#trupat3d">Shiko trupat</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Per cfare flet projekti?</h3>
+        <div class="mini-grid">
+          <div class="mini">
+            <div class="symbol">2D</div>
+            <strong>Figurat planare</strong>
+            <span>Perimetri, siperfaqe, kende</span>
+          </div>
+          <div class="mini">
+            <div class="symbol">3D</div>
+            <strong>Trupat ne hapesire</strong>
+            <span>Faqe, brinje, kulme, vellim</span>
+          </div>
+          <div class="mini">
+            <div class="symbol">PI</div>
+            <strong>Formula kryesore</strong>
+            <span>Llogaritje reale ne ndertim</span>
+          </div>
+          <div class="mini">
+            <div class="symbol">ARC</div>
+            <strong>Arkitektura</strong>
+            <span>Shembuj, stabilitet, estetike</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Pse gjeometria eshte kaq e rendesishme?</h2>
+        <p class="section-lead">
+          Gjeometria nuk eshte vetem teori. Ajo ndihmon ne vizatim teknik, projektim, matje, ndarje hapesire,
+          llogaritje materialesh, qendrueshmeri strukturore dhe harmoni estetike. Nje ndertese e mire kerkon
+          saktesi matematikore po aq sa edhe ide krijuese.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Praktike</h3>
+          <p>Arkitektet dhe inxhinieret perdorin siperfaqe, vellime, pjerresi, diagonale dhe kende cdo dite.</p>
+          <div class="tag">Matje dhe llogaritje</div>
+        </article>
+        <article class="card">
+          <h3>Strukturore</h3>
+          <p>Trekendeshi, harku dhe kupola perdoren per te shperndare forcat dhe per te rritur stabilitetin.</p>
+          <div class="tag">Forca dhe qendrueshmeri</div>
+        </article>
+        <article class="card">
+          <h3>Estetike</h3>
+          <p>Simetria, ritmi, moduli dhe proporcioni e bejne nje objekt me te bukur dhe me te rregullt.</p>
+          <div class="tag">Harmoni vizuale</div>
+        </article>
+        <article class="card">
+          <h3>Didaktike</h3>
+          <p>Ky projekt lidh matematiken e shkolles me boten reale dhe e ben prezantimin me bindes.</p>
+          <div class="tag">Mesim i aplikuar</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="bazat">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Elementet baze te gjeometrise</h2>
+        <p class="section-lead">
+          Para se te flasim per figurat dhe trupat, duhet te kuptojme elementet themelore qe ndertojne gjithe
+          boten gjeometrike: pika, vijat, segmentet, rrezet, kendet, planin dhe hapesiren.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Pika</h3>
+          <p>Pika tregon vetem pozicion dhe nuk ka gjatesi, gjeresi apo trashesi. Ajo shenohet shpesh me A, B, C.</p>
+        </div>
+        <div class="card">
+          <h3>Vija dhe segmenti</h3>
+          <p>Vija shtrihet pafund ne te dy drejtimet, ndersa segmenti ka dy skaje dhe gjatesi te caktuar.</p>
+        </div>
+        <div class="card">
+          <h3>Rrezja</h3>
+          <p>Rrezja ka nje pike fillimi dhe zgjatet pafund vetem ne nje drejtim.</p>
+        </div>
+        <div class="card">
+          <h3>Kendet</h3>
+          <p>Kend i mprehte, kend i drejte, kend i gjere, kend i shtrire dhe kend i plote jane bazike ne projektim.</p>
+        </div>
+        <div class="card">
+          <h3>Plani</h3>
+          <p>Plani eshte siperfaqe e sheshte dy-dimensionale ku paraqiten figurat 2D dhe planimetrite.</p>
+        </div>
+        <div class="card">
+          <h3>Hapesira</h3>
+          <p>Hapesira tre-dimensionale eshte ambienti ku shfaqen trupat gjeometrike dhe objektet reale.</p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Klasifikimi i kendeve</h3>
+        <p>
+          Kendet jane shume te rendesishme ne arkitekture sepse percaktojne pjerresine e catise, hapjen e nje
+          strukture, pozicionin e shkalleve dhe kompozimin e fasades.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Lloji i kendit</th>
+                <th>Masa</th>
+                <th>Perdorimi ne praktike</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Kend i mprehte</td>
+                <td>Me i vogel se 90 grade</td>
+                <td>Shfaqet ne trekendesha, catite e pjerrta dhe forma dinamike.</td>
+              </tr>
+              <tr>
+                <td>Kend i drejte</td>
+                <td>Fiks 90 grade</td>
+                <td>Perdoret ne mure, dysheme, dritare, dyer dhe planimetri drejtkendore.</td>
+              </tr>
+              <tr>
+                <td>Kend i gjere</td>
+                <td>Me i madh se 90 grade dhe me i vogel se 180 grade</td>
+                <td>Shfaqet ne dizajn modern, kthesa dhe struktura jo standarde.</td>
+              </tr>
+              <tr>
+                <td>Kend i shtrire</td>
+                <td>180 grade</td>
+                <td>Lidhet me vijat e drejta dhe me vazhdimesine lineare.</td>
+              </tr>
+              <tr>
+                <td>Kend i plote</td>
+                <td>360 grade</td>
+                <td>Perdoret ne rrotullime, kupola rrethore dhe kompozime qendrore.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="figurat2d">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Figurat gjeometrike 2D - katalog i zgjeruar</h2>
+        <p class="section-lead">
+          Figurat 2D kane gjatesi dhe gjeresi, por jo trashesi. Ato perdoren ne planimetri, fasada, dekorime,
+          vizatime teknike dhe ndarje funksionale te hapesires. Me poshte jane llojet kryesore dhe me te njohura.
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>1. Trekendeshat</h3>
+        <p>
+          Trekendeshi eshte nje nga format me te rendesishme ne gjeometri dhe ne ndertim, sepse eshte shume i
+          qendrueshem. Ai klasifikohet sipas brinjeve dhe sipas kendeve.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Trekendesh i barabrinje</h3>
+            <p>Ka 3 brinje te barabarta dhe 3 kende prej 60 grade. Simetri e larte dhe pamje shume e rregullt.</p>
+            <div class="tag">A = (b x h) / 2</div>
+          </article>
+          <article class="card">
+            <h3>Trekendesh dybrinjesh</h3>
+            <p>Ka 2 brinje te barabarta. Perdoret shpesh ne forma dekorative dhe elemente fasade.</p>
+            <div class="tag">Dy brinje te njejta</div>
+          </article>
+          <article class="card">
+            <h3>Trekendesh i pabarabrinje</h3>
+            <p>Ka 3 brinje te ndryshme. Ofron larmi ne dizajn dhe ne ndarje jo standarde te hapesires.</p>
+            <div class="tag">3 brinje te ndryshme</div>
+          </article>
+          <article class="card">
+            <h3>Trekendesh kenddrejte</h3>
+            <p>Ka nje kend prej 90 grade. Eshte shume i rendesishem per Pitagoren, catite dhe matjet diagonale.</p>
+            <div class="tag">a^2 + b^2 = c^2</div>
+          </article>
+          <article class="card">
+            <h3>Trekendesh kendmprehte</h3>
+            <p>Te tre kendet jane me te vegjel se 90 grade. Jep pamje te mprehte dhe te ngritur.</p>
+            <div class="tag">Te tre kendet &lt; 90</div>
+          </article>
+          <article class="card">
+            <h3>Trekendesh kendgjere</h3>
+            <p>Ka nje kend me te madh se 90 grade. Perdoret ne disa kompozime moderne.</p>
+            <div class="tag">Nje kend &gt; 90</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>2. Katerkendeshat</h3>
+        <p>
+          Katerkendeshat jane shume te perdorura ne arkitekture, sidomos ne mure, dritare, dysheme, pllaka,
+          mobilim, fasada dhe plane ndertimi.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Katrori</h3>
+            <p>Ka 4 brinje te barabarta dhe 4 kende te drejta. Perdoret ne module, pllaka dhe kompozime simetrike.</p>
+            <div class="tag">A = a^2, P = 4a</div>
+          </article>
+          <article class="card">
+            <h3>Drejtkendeshi</h3>
+            <p>Ka 4 kende te drejta dhe brinje perballe te barabarta. Eshte forma me e zakonshme ne ndertesa.</p>
+            <div class="tag">A = a x b</div>
+          </article>
+          <article class="card">
+            <h3>Paralelogrami</h3>
+            <p>Ka dy pale brinjesh paralele. Jep levizje vizuale dhe perdoret ne fasada me ritem diagonal.</p>
+            <div class="tag">A = b x h</div>
+          </article>
+          <article class="card">
+            <h3>Rombi</h3>
+            <p>Ka 4 brinje te barabarta, por jo domosdoshmerisht kende te drejta. Shpesh perdoret ne motive dekorative.</p>
+            <div class="tag">A = (d1 x d2) / 2</div>
+          </article>
+          <article class="card">
+            <h3>Trapezi</h3>
+            <p>Ka nje pale brinjesh paralele. Eshte i dobishem ne prerje teknike dhe ne kompozime me pjerresi.</p>
+            <div class="tag">A = ((B + b) x h) / 2</div>
+          </article>
+          <article class="card">
+            <h3>Deltoidi</h3>
+            <p>Ka dy pale brinjesh fqinje te barabarta. Perdoret ne ornamente dhe kompozime simetrike.</p>
+            <div class="tag">Kite / deltoid</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>3. Shumekendesha te rregullta dhe te parregullta</h3>
+        <p>
+          Shumekendeshi eshte figure me shume se 4 brinje. Ai mund te jete i rregullt, kur te gjitha brinjet dhe
+          kendet jane te barabarta, ose i parregullt, kur ato ndryshojne.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Pesekendeshi</h3>
+            <p>Ka 5 brinje. Versioni i rregullt ka simetri te bukur dhe lidhet shpesh me raportin e arte.</p>
+            <div class="tag">n = 5</div>
+          </article>
+          <article class="card">
+            <h3>Gjashtkendeshi</h3>
+            <p>Ka 6 brinje. Shume i rendesishem ne modele natyrore dhe ne rrjete modulare.</p>
+            <div class="tag">n = 6</div>
+          </article>
+          <article class="card">
+            <h3>Shtatkendeshi</h3>
+            <p>Ka 7 brinje. Me i rralle ne ndertim, por i dobishem per ilustruar shumekendeshat.</p>
+            <div class="tag">n = 7</div>
+          </article>
+          <article class="card">
+            <h3>Tetkendeshi</h3>
+            <p>Ka 8 brinje. Perdoret ne planimetri qendrore, kulla dhe dhoma me organizim ceremonial.</p>
+            <div class="tag">n = 8</div>
+          </article>
+          <article class="card">
+            <h3>Nentekendeshi</h3>
+            <p>Ka 9 brinje. Shfaqet me pak, por sherben per te treguar zgjerimin e familjes se shumekendesheve.</p>
+            <div class="tag">n = 9</div>
+          </article>
+          <article class="card">
+            <h3>Dhjetekendeshi</h3>
+            <p>Ka 10 brinje. Jep ritem elegant dhe mund te perdoret ne dizajn ornamental.</p>
+            <div class="tag">n = 10</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>4. Figurat me vije te lakuar</h3>
+        <p>
+          Keto forma japin butesi, rrjedhshmeri dhe ndjesi qendrore. Ne arkitekture perdoren ne kupola, atriume,
+          dritare, sheshe rrethore dhe elemente dekorative.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Rrethi</h3>
+            <p>Te gjitha pikat kane te njejten largesi nga qendra. Jep simetri perfekte rrotulluese.</p>
+            <div class="tag">A = pi r^2, C = 2pi r</div>
+          </article>
+          <article class="card">
+            <h3>Gjysmerrethi</h3>
+            <p>Gjysma e nje rrethi. Perdoret ne harqe, nishe dhe hapje klasike.</p>
+            <div class="tag">A = (pi r^2) / 2</div>
+          </article>
+          <article class="card">
+            <h3>Elipsa</h3>
+            <p>Ngjan me rrethin, por ka dy boshte te ndryshem. Jep elegance dhe levizje organike.</p>
+            <div class="tag">A = pi a b</div>
+          </article>
+          <article class="card">
+            <h3>Sektori rrethor</h3>
+            <p>Eshte pjese e rrethit e kufizuar nga dy rreze dhe nje hark. Perdoret ne skema radiale.</p>
+            <div class="tag">Pjese e rrethit</div>
+          </article>
+          <article class="card">
+            <h3>Unaza rrethore</h3>
+            <p>Eshte zona mes dy rretheve bashkeqendrore. Shfaqet ne sheshe, kolona dhe ornamente.</p>
+            <div class="tag">Rrethe koncentrike</div>
+          </article>
+          <article class="card">
+            <h3>Harku</h3>
+            <p>Harku nuk eshte figure e plote me vete, por eshte pjese e rendesishme e gjeometrise dhe e arkitektures.</p>
+            <div class="tag">Kryesor ne ura dhe hyrje</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Tabele permbledhese e figurave 2D</h3>
+        <p>
+          Tabela e meposhtme i rendit figurat me te rendesishme sipas brinjeve, kendeve dhe perdorimit.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Figura</th>
+                <th>Brinje / anet</th>
+                <th>Kende</th>
+                <th>Formule kryesore</th>
+                <th>Perdorim tipik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Trekendesh</td>
+                <td>3</td>
+                <td>Shuma 180 grade</td>
+                <td>A = (b x h) / 2</td>
+                <td>Catite, strukturat metalike, ura</td>
+              </tr>
+              <tr>
+                <td>Katror</td>
+                <td>4 te barabarta</td>
+                <td>4 kende te drejta</td>
+                <td>A = a^2</td>
+                <td>Pllaka, rrjete modulare, dritare</td>
+              </tr>
+              <tr>
+                <td>Drejtkendesh</td>
+                <td>4, perballe te barabarta</td>
+                <td>4 kende te drejta</td>
+                <td>A = a x b</td>
+                <td>Dhoma, dyer, ekrane, plane</td>
+              </tr>
+              <tr>
+                <td>Romb</td>
+                <td>4 te barabarta</td>
+                <td>Jo domosdoshmerisht 90 grade</td>
+                <td>A = (d1 x d2) / 2</td>
+                <td>Dekorime, modele fasade</td>
+              </tr>
+              <tr>
+                <td>Trapez</td>
+                <td>4</td>
+                <td>Te ndryshme</td>
+                <td>A = ((B + b) x h) / 2</td>
+                <td>Pjerresi, prerje teknike</td>
+              </tr>
+              <tr>
+                <td>Pesekendesh / gjashtekendesh / tetkendesh</td>
+                <td>5, 6, 8</td>
+                <td>Te shumta</td>
+                <td>Ndahen ne trekendesha per llogaritje</td>
+                <td>Planimetri speciale, ornamente</td>
+              </tr>
+              <tr>
+                <td>Rreth</td>
+                <td>Pa brinje te drejta</td>
+                <td>Nuk klasifikohet si shumekendesh</td>
+                <td>A = pi r^2</td>
+                <td>Kupola, sheshe qendrore, dritare</td>
+              </tr>
+              <tr>
+                <td>Elipse</td>
+                <td>E lakuar</td>
+                <td>Jo kendore</td>
+                <td>A = pi a b</td>
+                <td>Salla, atriume, motive fluide</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trupat3d">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Trupat gjeometrike 3D - katalog i zgjeruar</h2>
+        <p class="section-lead">
+          Trupat gjeometrike kane gjatesi, gjeresi dhe lartesi. Ne arkitekture ata ndihmojne ne kuptimin e vellimit,
+          organizimit te hapesires, mbulimit te sallave, modelimit te objekteve dhe llogaritjes se materialeve.
+        </p>
+      </div>
+
+      <div class="subsection">
+        <h3>1. Poliedrat kryesore</h3>
+        <p>
+          Poliedrat jane trupa me faqe te sheshta. Ata kane kulme, brinje dhe faqe, dhe jane shume te dobishem
+          ne modelim, struktura metalike dhe kompozime modulare.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Kubi</h3>
+            <p>Ka 6 faqe katrore, 12 brinje dhe 8 kulme. Eshte modeli me i thjeshte i nje vellimi te rregullt.</p>
+            <div class="tag">V = a^3</div>
+          </article>
+          <article class="card">
+            <h3>Kuboidi</h3>
+            <p>Ka 6 faqe drejtkendore. Shumica e ndertesave reale i afrohen kesaj forme.</p>
+            <div class="tag">V = a x b x h</div>
+          </article>
+          <article class="card">
+            <h3>Tetraedri</h3>
+            <p>Ka 4 faqe trekendore. Eshte nje nga trupat me te qendrueshem ne modelim strukturor.</p>
+            <div class="tag">4 faqe</div>
+          </article>
+          <article class="card">
+            <h3>Oktaedri</h3>
+            <p>Ka 8 faqe trekendore. Perdoret ne modele gjeometrike dhe ne kompozime simetrike.</p>
+            <div class="tag">8 faqe</div>
+          </article>
+          <article class="card">
+            <h3>Dodekaedri</h3>
+            <p>Ka 12 faqe pesekendore. Shfaqet me shume ne modele teorike dhe dekorime gjeometrike.</p>
+            <div class="tag">12 faqe</div>
+          </article>
+          <article class="card">
+            <h3>Ikosaedri</h3>
+            <p>Ka 20 faqe trekendore. I rendesishem ne gjeometrine e trupave te rregullt.</p>
+            <div class="tag">20 faqe</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>2. Prizmat dhe piramidat</h3>
+        <p>
+          Keta trupa jane shume te rendesishem ne shkollim dhe ne arkitekture sepse ndertohen lehtesisht nga baza
+          shumekendore dhe lartesia.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Prizma trekendore</h3>
+            <p>Ka dy baza trekendore paralele. Perdoret ne mbulesa, korniza dhe volumetri lineare.</p>
+            <div class="tag">V = A e bazes x h</div>
+          </article>
+          <article class="card">
+            <h3>Prizma katerkendeshe</h3>
+            <p>Kur baza eshte katerkendesh, forma i afrohet kuboidit ose trupave te ngjashem.</p>
+            <div class="tag">Baza poligonale</div>
+          </article>
+          <article class="card">
+            <h3>Prizma pesekendeshe</h3>
+            <p>Ka baze pesekendore dhe mund te krijoje volum interesante ne planimetri speciale.</p>
+            <div class="tag">5 ane ne baze</div>
+          </article>
+          <article class="card">
+            <h3>Piramida trekendore</h3>
+            <p>Ka nje baze trekendore dhe faqet anesore takohen ne nje kulm te vetem.</p>
+            <div class="tag">V = (A e bazes x h) / 3</div>
+          </article>
+          <article class="card">
+            <h3>Piramida katerkendeshe</h3>
+            <p>Eshte forma klasike e piramidave monumentale dhe e kulmeve dekorative.</p>
+            <div class="tag">Baze katrore ose drejtkendore</div>
+          </article>
+          <article class="card">
+            <h3>Frustumi i piramides</h3>
+            <p>Krijohet kur maja pritet paralelisht me bazen. Perdoret ne disa objekte moderne dhe dekorative.</p>
+            <div class="tag">Piramide e prere</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>3. Trupat me siperfaqe te lakuar</h3>
+        <p>
+          Keta trupa lidhen ngushte me arkitekturen monumentale, kupolat, kolonat, silot, rezervuaret dhe objektet
+          me forme te rrumbullaket.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Cilindri</h3>
+            <p>Ka dy baza rrethore dhe nje siperfaqe anesore te lakuar. Shfaqet ne kolona, kulla dhe rezervuare.</p>
+            <div class="tag">V = pi r^2 h</div>
+          </article>
+          <article class="card">
+            <h3>Koni</h3>
+            <p>Ka nje baze rrethore dhe nje maje. Perdoret ne kulme, objekte simbolike dhe struktura dekorative.</p>
+            <div class="tag">V = (pi r^2 h) / 3</div>
+          </article>
+          <article class="card">
+            <h3>Frustumi i konit</h3>
+            <p>Koni i prere formon nje trup te dobishem per vazo, kulla dhe forma tranzicioni.</p>
+            <div class="tag">Kon i prere</div>
+          </article>
+          <article class="card">
+            <h3>Sfera</h3>
+            <p>Te gjitha pikat ne siperfaqe kane te njejten largesi nga qendra. Jep simetri maksimale.</p>
+            <div class="tag">V = (4/3)pi r^3</div>
+          </article>
+          <article class="card">
+            <h3>Hemisfera</h3>
+            <p>Eshte gjysma e nje sfere dhe perdoret shume ne kupola dhe mbulime qendrore.</p>
+            <div class="tag">Gjysme sfere</div>
+          </article>
+          <article class="card">
+            <h3>Tori</h3>
+            <p>Ngjan me forme unaze. Nuk eshte shume i zakonshem ne shkollen baze, por eshte suplementar dhe interesant.</p>
+            <div class="tag">Forme unazore 3D</div>
+          </article>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Tabele permbledhese e trupave 3D</h3>
+        <p>
+          Kjo tabele tregon dallimet kryesore midis trupave sipas faqeve, kulmeve, brinjeve dhe formulave.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Trupi</th>
+                <th>Faqe</th>
+                <th>Brinje</th>
+                <th>Kulme</th>
+                <th>Formula kryesore</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Kubi</td>
+                <td>6</td>
+                <td>12</td>
+                <td>8</td>
+                <td>V = a^3</td>
+              </tr>
+              <tr>
+                <td>Kuboidi</td>
+                <td>6</td>
+                <td>12</td>
+                <td>8</td>
+                <td>V = a x b x h</td>
+              </tr>
+              <tr>
+                <td>Prizma trekendore</td>
+                <td>5</td>
+                <td>9</td>
+                <td>6</td>
+                <td>V = A e bazes x h</td>
+              </tr>
+              <tr>
+                <td>Piramida katerkendeshe</td>
+                <td>5</td>
+                <td>8</td>
+                <td>5</td>
+                <td>V = (A e bazes x h) / 3</td>
+              </tr>
+              <tr>
+                <td>Cilindri</td>
+                <td>2 baza + 1 siperfaqe anesore</td>
+                <td>2 kufij rrethore</td>
+                <td>0</td>
+                <td>V = pi r^2 h</td>
+              </tr>
+              <tr>
+                <td>Koni</td>
+                <td>1 baze + 1 siperfaqe anesore</td>
+                <td>1 kufi rrethor</td>
+                <td>1</td>
+                <td>V = (pi r^2 h) / 3</td>
+              </tr>
+              <tr>
+                <td>Sfera</td>
+                <td>1 siperfaqe e lakuar</td>
+                <td>0</td>
+                <td>0</td>
+                <td>V = (4/3)pi r^3</td>
+              </tr>
+              <tr>
+                <td>Hemisfera</td>
+                <td>1 baze + 1 siperfaqe e lakuar</td>
+                <td>1 kufi rrethor</td>
+                <td>0</td>
+                <td>V = (2/3)pi r^3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formula">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Formula, rregulla dhe info suplementare</h2>
+        <p class="section-lead">
+          Kjo pjese sherben si reference e shpejte per prezantim: siperfaqe, perimetra, volume,
+          simetri, diagonale, shuma kendesh dhe rregulla qe i lidhin figurat me trupat.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Formula kryesore per figurat 2D</h3>
+          <div class="formula-box"><strong>Trekendesh:</strong><br>A = (b x h) / 2</div>
+          <div class="formula-box"><strong>Katror:</strong><br>A = a^2, P = 4a</div>
+          <div class="formula-box"><strong>Drejtkendesh:</strong><br>A = a x b, P = 2(a + b)</div>
+          <div class="formula-box"><strong>Romb:</strong><br>A = (d1 x d2) / 2</div>
+          <div class="formula-box"><strong>Trapez:</strong><br>A = ((B + b) x h) / 2</div>
+          <div class="formula-box"><strong>Rreth:</strong><br>A = pi r^2, C = 2pi r</div>
+          <div class="formula-box"><strong>Elipse:</strong><br>A = pi a b</div>
+        </div>
+
+        <div class="panel">
+          <h3>Formula kryesore per trupat 3D</h3>
+          <div class="formula-box"><strong>Kub:</strong><br>V = a^3, S = 6a^2</div>
+          <div class="formula-box"><strong>Kuboid:</strong><br>V = a x b x h</div>
+          <div class="formula-box"><strong>Prizem:</strong><br>V = A e bazes x h</div>
+          <div class="formula-box"><strong>Piramide:</strong><br>V = (A e bazes x h) / 3</div>
+          <div class="formula-box"><strong>Cilinder:</strong><br>V = pi r^2 h</div>
+          <div class="formula-box"><strong>Kon:</strong><br>V = (pi r^2 h) / 3</div>
+          <div class="formula-box"><strong>Sfere:</strong><br>V = (4/3)pi r^3</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Informacione suplementare qe e bejne projektin me te forte</h3>
+        <p>
+          Kjo pjese mund te perdoret gjate prezantimit per te treguar thellesi, jo vetem listim figurash dhe trupash.
+        </p>
+        <div class="grid-3">
+          <div class="bullet">
+            <h4>Simetria</h4>
+            <p>Figura ose trupi eshte simetrik kur mund te ndahet ne pjese te barabarta. Simetria krijon rend dhe bukuri ne fasada.</p>
+          </div>
+          <div class="bullet">
+            <h4>Proporcioni</h4>
+            <p>Raporti i permasave ndikon drejtperdrejt ne estetike. Nje objekt me proporcione te mira duket i balancuar.</p>
+          </div>
+          <div class="bullet">
+            <h4>Raporti i arte</h4>
+            <p>Raporti i arte lidhet me kompozime harmonike dhe permendet shpesh ne art, arkitekture dhe dizajn.</p>
+          </div>
+          <div class="bullet">
+            <h4>Pitagora</h4>
+            <p>Teorema e Pitagores eshte jetike per diagonalet, catite e pjerrta, lartesite dhe matjet indirekte.</p>
+          </div>
+          <div class="bullet">
+            <h4>Euler per poliedrat</h4>
+            <p>Per shume poliedra vlen rregulli: Faqe + Kulme - Brinje = 2. Kjo eshte ide shume e mire suplementare.</p>
+          </div>
+          <div class="bullet">
+            <h4>Shuma e kendeve</h4>
+            <p>Ne nje shumekendesh me n ane, shuma e kendeve te brendshme jepet nga formula (n - 2) x 180 grade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="arkitektura">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Gjeometria ne arkitekture dhe ne jeten reale</h2>
+        <p class="section-lead">
+          Ketu lidhen format matematikore me objekte konkrete. Kjo pjese e ben projektin me bindes sepse tregon
+          zbatimin e drejtperdrejte te teorise ne boten reale.
+        </p>
+      </div>
+
+      <div class="highlight">
+        <h3>Si shfaqen figurat dhe trupat ne arkitekture?</h3>
+        <ul>
+          <li>Trekendeshi perdoret ne cati, skelete metalike dhe ura per shkak te stabilitetit.</li>
+          <li>Drejtkendeshi dhe katrori perdoren ne planimetri, mure, dritare, pllaka dhe mobilim.</li>
+          <li>Rrethi, gjysmerrethi dhe harku shfaqen ne kupola, tunele, dritare rrethore dhe hyrje monumentale.</li>
+          <li>Cilindri perdoret ne kolona, kulla, silot dhe rezervuare.</li>
+          <li>Piramida dhe koni perdoren ne kulme dekorative dhe forma monumentale.</li>
+          <li>Hemisfera perdoret ne kupola sportive, tempuj dhe salla qendrore.</li>
+        </ul>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>2D</strong>
+            <span>Planimetri dhe vizatim teknik</span>
+          </div>
+          <div class="stat">
+            <strong>3D</strong>
+            <span>Volum dhe hapesire reale</span>
+          </div>
+          <div class="stat">
+            <strong>PI</strong>
+            <span>Kryesor per rrethat dhe kupolat</span>
+          </div>
+          <div class="stat">
+            <strong>PIT</strong>
+            <span>Diagonalet dhe pjerresia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Shembuj reale nga bota e arkitektures</h3>
+        <p>
+          Keto shembuj mund t'i permendesh ne prezantim per ta bere projektin me konkret dhe me interesant.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Ndertesa / objekti</th>
+                <th>Forma kryesore</th>
+                <th>Mesazhi matematikor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pantheoni ne Rome</td>
+                <td>Rreth, hemisfere, kupole</td>
+                <td>Tregon fuqine e formes qendrore dhe shperndarjen e mire te ngarkesave.</td>
+              </tr>
+              <tr>
+                <td>Kulla Eiffel</td>
+                <td>Trekendesha dhe rrjete metalike</td>
+                <td>Demonstron stabilitetin e trekendeshit ne struktura te larta.</td>
+              </tr>
+              <tr>
+                <td>Urat me hark</td>
+                <td>Hark, rreth, kompresion</td>
+                <td>Provojne se forma e duhur ndihmon ne mbajtjen e peshave te medha.</td>
+              </tr>
+              <tr>
+                <td>Rrokaqiejte moderne</td>
+                <td>Drejtkendesha dhe kuboid</td>
+                <td>Japin efikasitet ne planimetri dhe organizim vertikal.</td>
+              </tr>
+              <tr>
+                <td>Kupolat sportive</td>
+                <td>Hemisfera, panele trekendeshe</td>
+                <td>Kombinojne estetiken me mbulimin e hapesirave te medha pa shume kolona.</td>
+              </tr>
+              <tr>
+                <td>Kolonat klasike</td>
+                <td>Cilinder</td>
+                <td>Forma cilindrike siguron qartesi vizuale dhe mbeshtetje te forte.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="interaktive">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Llogarites interaktive per prezantim</h2>
+        <p class="section-lead">
+          Keto forma interaktive e bejne prezantimin me aktiv. Mund te ndryshosh vlerat live dhe te tregosh
+          menjehere si ndryshojne siperfaqja, perimetri dhe vellimi.
+        </p>
+      </div>
+
+      <div class="interactive">
+        <div class="panel">
+          <h3>Kalkulator per figura 2D</h3>
+          <div class="controls">
+            <div class="control-group">
+              <label for="shapeType">Zgjidh figuren</label>
+              <select id="shapeType">
+                <option value="square">Katror</option>
+                <option value="rectangle">Drejtkendesh</option>
+                <option value="triangle">Trekendesh</option>
+                <option value="circle">Rreth</option>
+                <option value="trapezoid">Trapez</option>
+                <option value="rhombus">Romb</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label for="valueA" id="labelA">Brinja a</label>
+              <input type="number" id="valueA" value="6" min="0" step="any" />
+            </div>
+
+            <div class="control-group" id="groupB">
+              <label for="valueB" id="labelB">Brinja b</label>
+              <input type="number" id="valueB" value="4" min="0" step="any" />
+            </div>
+
+            <div class="control-group" id="groupC">
+              <label for="valueC" id="labelC">Lartesia h</label>
+              <input type="number" id="valueC" value="5" min="0" step="any" />
+            </div>
+          </div>
+
+          <div class="result-box">
+            <h4>Rezultati</h4>
+            <div class="result" id="shapeResult">Siperfaqja: 36 m^2 | Perimetri: 24 m</div>
+            <div class="note" id="shapeNote">Ndrysho formen ose vlerat per llogaritje te reja.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Kalkulator per trupa 3D</h3>
+          <div class="controls">
+            <div class="control-group">
+              <label for="solidType">Zgjidh trupin</label>
+              <select id="solidType">
+                <option value="cube">Kub</option>
+                <option value="rectangularPrism">Kuboid</option>
+                <option value="cylinder">Cilinder</option>
+                <option value="cone">Kon</option>
+                <option value="sphere">Sfere</option>
+                <option value="pyramid">Piramide katerkendeshe</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label for="solidA" id="solidLabelA">Brinja a</label>
+              <input type="number" id="solidA" value="4" min="0" step="any" />
+            </div>
+
+            <div class="control-group" id="solidGroupB">
+              <label for="solidB" id="solidLabelB">Brinja b</label>
+              <input type="number" id="solidB" value="3" min="0" step="any" />
+            </div>
+
+            <div class="control-group" id="solidGroupC">
+              <label for="solidC" id="solidLabelC">Lartesia h</label>
+              <input type="number" id="solidC" value="8" min="0" step="any" />
+            </div>
+          </div>
+
+          <div class="result-box">
+            <h4>Rezultati</h4>
+            <div class="result" id="solidResult">Vellimi: 64 m^3 | Siperfaqja totale: 96 m^2</div>
+            <div class="note" id="solidNote">Ndrysho trupin ose vlerat per llogaritje te reja.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="perfundim">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Perfundim</h2>
+        <p class="section-lead">
+          Gjeometria eshte nje gjuhe universale e formes, e struktures dhe e hapesires. Ne kete projekt u paraqiten
+          figurat gjeometrike me kryesore, trupat gjeometrike me te rendesishem, formulat, klasifikimet dhe zbatimet
+          e tyre ne arkitekture. Kjo tregon qarte se matematika nuk qendron vetem ne liber, por jeton ne cdo ndertese,
+          ure, kupole, dritare dhe plan urban.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Cfare mesova</h3>
+          <p>Format 2D dhe trupat 3D jane baza e ndertimit, dizajnit, arkitektures dhe kuptimit te hapesires.</p>
+        </article>
+        <article class="card">
+          <h3>Pse ky projekt eshte i plote</h3>
+          <p>Ai perfshin konceptet baze, klasifikime, formula, tabela, shembuj reale dhe pjese interaktive.</p>
+        </article>
+        <article class="card">
+          <h3>Autori</h3>
+          <p>Ky projekt me titull "Gjeometria ne Arkitekture" eshte punuar nga Kurt Babasi.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p><strong>Projekt matematike:</strong> Gjeometria ne Arkitekture</p>
+      <p class="small">Punuar nga Kurt Babasi</p>
+    </div>
+  </footer>
+
+  <script>
+    const shapeType = document.getElementById("shapeType");
+    const valueA = document.getElementById("valueA");
+    const valueB = document.getElementById("valueB");
+    const valueC = document.getElementById("valueC");
+    const labelA = document.getElementById("labelA");
+    const labelB = document.getElementById("labelB");
+    const labelC = document.getElementById("labelC");
+    const groupB = document.getElementById("groupB");
+    const groupC = document.getElementById("groupC");
+    const shapeResult = document.getElementById("shapeResult");
+    const shapeNote = document.getElementById("shapeNote");
+
+    const solidType = document.getElementById("solidType");
+    const solidA = document.getElementById("solidA");
+    const solidB = document.getElementById("solidB");
+    const solidC = document.getElementById("solidC");
+    const solidLabelA = document.getElementById("solidLabelA");
+    const solidLabelB = document.getElementById("solidLabelB");
+    const solidLabelC = document.getElementById("solidLabelC");
+    const solidGroupB = document.getElementById("solidGroupB");
+    const solidGroupC = document.getElementById("solidGroupC");
+    const solidResult = document.getElementById("solidResult");
+    const solidNote = document.getElementById("solidNote");
+
+    function round(n){
+      return Number.isFinite(n) ? Number(n.toFixed(2)) : 0;
+    }
+
+    function updateShapeLabels(){
+      const type = shapeType.value;
+
+      if(type === "square"){
+        labelA.textContent = "Brinja a";
+        groupB.style.display = "none";
+        groupC.style.display = "none";
+      } else if(type === "rectangle"){
+        labelA.textContent = "Gjatesia a";
+        labelB.textContent = "Gjeresia b";
+        groupB.style.display = "grid";
+        groupC.style.display = "none";
+      } else if(type === "triangle"){
+        labelA.textContent = "Baza b";
+        labelC.textContent = "Lartesia h";
+        groupB.style.display = "none";
+        groupC.style.display = "grid";
+      } else if(type === "circle"){
+        labelA.textContent = "Rrezja r";
+        groupB.style.display = "none";
+        groupC.style.display = "none";
+      } else if(type === "trapezoid"){
+        labelA.textContent = "Baza e madhe B";
+        labelB.textContent = "Baza e vogel b";
+        labelC.textContent = "Lartesia h";
+        groupB.style.display = "grid";
+        groupC.style.display = "grid";
+      } else if(type === "rhombus"){
+        labelA.textContent = "Diagonalja d1";
+        labelB.textContent = "Diagonalja d2";
+        groupB.style.display = "grid";
+        groupC.style.display = "none";
+      }
+
+      calculateShape();
+    }
+
+    function calculateShape(){
+      const type = shapeType.value;
+      const a = parseFloat(valueA.value) || 0;
+      const b = parseFloat(valueB.value) || 0;
+      const c = parseFloat(valueC.value) || 0;
+
+      if(type === "square"){
+        const area = a * a;
+        const perimeter = 4 * a;
+        shapeResult.textContent = `Siperfaqja: ${round(area)} m^2 | Perimetri: ${round(perimeter)} m`;
+        shapeNote.textContent = "Formula: A = a^2, P = 4a";
+      } else if(type === "rectangle"){
+        const area = a * b;
+        const perimeter = 2 * (a + b);
+        shapeResult.textContent = `Siperfaqja: ${round(area)} m^2 | Perimetri: ${round(perimeter)} m`;
+        shapeNote.textContent = "Formula: A = a x b, P = 2(a + b)";
+      } else if(type === "triangle"){
+        const area = (a * c) / 2;
+        shapeResult.textContent = `Siperfaqja: ${round(area)} m^2`;
+        shapeNote.textContent = "Formula: A = (b x h) / 2";
+      } else if(type === "circle"){
+        const area = Math.PI * a * a;
+        const perimeter = 2 * Math.PI * a;
+        shapeResult.textContent = `Siperfaqja: ${round(area)} m^2 | Perimetri: ${round(perimeter)} m`;
+        shapeNote.textContent = "Formula: A = pi r^2, C = 2pi r";
+      } else if(type === "trapezoid"){
+        const area = ((a + b) * c) / 2;
+        shapeResult.textContent = `Siperfaqja: ${round(area)} m^2`;
+        shapeNote.textContent = "Formula: A = ((B + b) x h) / 2";
+      } else if(type === "rhombus"){
+        const area = (a * b) / 2;
+        shapeResult.textContent = `Siperfaqja: ${round(area)} m^2`;
+        shapeNote.textContent = "Formula: A = (d1 x d2) / 2";
+      }
+    }
+
+    function updateSolidLabels(){
+      const type = solidType.value;
+
+      if(type === "cube"){
+        solidLabelA.textContent = "Brinja a";
+        solidGroupB.style.display = "none";
+        solidGroupC.style.display = "none";
+      } else if(type === "rectangularPrism"){
+        solidLabelA.textContent = "Gjatesia a";
+        solidLabelB.textContent = "Gjeresia b";
+        solidLabelC.textContent = "Lartesia h";
+        solidGroupB.style.display = "grid";
+        solidGroupC.style.display = "grid";
+      } else if(type === "cylinder"){
+        solidLabelA.textContent = "Rrezja r";
+        solidLabelC.textContent = "Lartesia h";
+        solidGroupB.style.display = "none";
+        solidGroupC.style.display = "grid";
+      } else if(type === "cone"){
+        solidLabelA.textContent = "Rrezja r";
+        solidLabelC.textContent = "Lartesia h";
+        solidGroupB.style.display = "none";
+        solidGroupC.style.display = "grid";
+      } else if(type === "sphere"){
+        solidLabelA.textContent = "Rrezja r";
+        solidGroupB.style.display = "none";
+        solidGroupC.style.display = "none";
+      } else if(type === "pyramid"){
+        solidLabelA.textContent = "Brinja e bazes a";
+        solidLabelC.textContent = "Lartesia h";
+        solidGroupB.style.display = "none";
+        solidGroupC.style.display = "grid";
+      }
+
+      calculateSolid();
+    }
+
+    function calculateSolid(){
+      const type = solidType.value;
+      const a = parseFloat(solidA.value) || 0;
+      const b = parseFloat(solidB.value) || 0;
+      const c = parseFloat(solidC.value) || 0;
+
+      if(type === "cube"){
+        const volume = a * a * a;
+        const surface = 6 * a * a;
+        solidResult.textContent = `Vellimi: ${round(volume)} m^3 | Siperfaqja totale: ${round(surface)} m^2`;
+        solidNote.textContent = "Formula: V = a^3, S = 6a^2";
+      } else if(type === "rectangularPrism"){
+        const volume = a * b * c;
+        const surface = 2 * ((a * b) + (a * c) + (b * c));
+        solidResult.textContent = `Vellimi: ${round(volume)} m^3 | Siperfaqja totale: ${round(surface)} m^2`;
+        solidNote.textContent = "Formula: V = a x b x h";
+      } else if(type === "cylinder"){
+        const volume = Math.PI * a * a * c;
+        const surface = 2 * Math.PI * a * (a + c);
+        solidResult.textContent = `Vellimi: ${round(volume)} m^3 | Siperfaqja totale: ${round(surface)} m^2`;
+        solidNote.textContent = "Formula: V = pi r^2 h";
+      } else if(type === "cone"){
+        const volume = (Math.PI * a * a * c) / 3;
+        const slant = Math.sqrt((a * a) + (c * c));
+        const surface = Math.PI * a * (a + slant);
+        solidResult.textContent = `Vellimi: ${round(volume)} m^3 | Siperfaqja totale: ${round(surface)} m^2`;
+        solidNote.textContent = "Formula: V = (pi r^2 h) / 3";
+      } else if(type === "sphere"){
+        const volume = (4 / 3) * Math.PI * a * a * a;
+        const surface = 4 * Math.PI * a * a;
+        solidResult.textContent = `Vellimi: ${round(volume)} m^3 | Siperfaqja totale: ${round(surface)} m^2`;
+        solidNote.textContent = "Formula: V = (4/3)pi r^3";
+      } else if(type === "pyramid"){
+        const volume = (a * a * c) / 3;
+        solidResult.textContent = `Vellimi: ${round(volume)} m^3`;
+        solidNote.textContent = "Formula: V = (A e bazes x h) / 3, me A = a^2";
+      }
+    }
+
+    shapeType.addEventListener("change", updateShapeLabels);
+    valueA.addEventListener("input", calculateShape);
+    valueB.addEventListener("input", calculateShape);
+    valueC.addEventListener("input", calculateShape);
+
+    solidType.addEventListener("change", updateSolidLabels);
+    solidA.addEventListener("input", calculateSolid);
+    solidB.addEventListener("input", calculateSolid);
+    solidC.addEventListener("input", calculateSolid);
+
+    updateShapeLabels();
+    updateSolidLabels();
+  </script>
+</body>
+</html>
