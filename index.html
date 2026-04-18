@@ -8,13 +8,14 @@
     :root{
       --navy:#11213b;
       --blue:#2853b8;
-      --sand:#f7efe1;
+      --sky:#efe4cf;
+      --sand:#efe1c7;
       --amber:#c77f18;
-      --card:#ffffff;
+      --card:#fffaf1;
       --text:#16263f;
       --muted:#5a6780;
-      --line:#d8e1ef;
-      --shadow:0 18px 44px rgba(17, 33, 59, 0.12);
+      --line:#e2d4bb;
+      --shadow:0 18px 44px rgba(17,33,59,.12);
       --radius:24px;
       --max:1280px;
     }
@@ -28,9 +29,15 @@
       font-family:Georgia, "Times New Roman", serif;
       line-height:1.65;
       background:
-        radial-gradient(circle at top left, rgba(199,127,24,.1), transparent 23%),
-        radial-gradient(circle at top right, rgba(40,83,184,.08), transparent 28%),
-        linear-gradient(180deg, #eef3ff 0%, #f8fbff 38%, #ffffff 100%);
+        radial-gradient(circle at top left, rgba(199,127,24,.14), transparent 23%),
+        radial-gradient(circle at top right, rgba(163,124,72,.08), transparent 28%),
+        linear-gradient(180deg, #f6efe2 0%, #f8f1e5 38%, #f4ead9 100%);
+    }
+
+    img{
+      max-width:100%;
+      height:auto;
+      display:block;
     }
 
     .container{
@@ -84,17 +91,17 @@
 
     .hero{
       color:#fff;
-      padding:78px 0 66px;
+      padding:76px 0 64px;
       background:
-        radial-gradient(circle at 80% 18%, rgba(255,255,255,.15), transparent 18%),
-        linear-gradient(135deg, #11213b 0%, #224aa6 55%, #2853b8 100%);
+        radial-gradient(circle at 80% 18%, rgba(255,244,221,.14), transparent 18%),
+        linear-gradient(135deg, #5c4330 0%, #8f6c45 55%, #c08a48 100%);
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:minmax(0, 1.1fr) minmax(320px, .9fr);
       gap:28px;
-      align-items:center;
+      align-items:start;
     }
 
     .badge{
@@ -111,21 +118,56 @@
 
     h1{
       margin:0 0 16px;
-      font-size:clamp(2.4rem, 5vw, 4.3rem);
-      line-height:1.04;
+      font-size:clamp(2.2rem, 5vw, 4.1rem);
+      line-height:1.05;
     }
 
-    .hero p{
-      margin:0 0 24px;
-      font-size:1.07rem;
+    .hero-intro{
+      margin:0 0 20px;
+      font-size:1.08rem;
       color:#dce8ff;
       max-width:760px;
+    }
+
+    .hero-copy{
+      min-width:0;
+    }
+
+    .hero-text-block{
+      background:rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      padding:18px 18px 2px;
+      margin-bottom:16px;
+    }
+
+    .hero-text-block h2{
+      margin:0 0 10px;
+      font-size:1.2rem;
+      color:#fff2d6;
+    }
+
+    .hero-text-block p{
+      margin:0 0 16px;
+      color:#dce8ff;
+      font-size:1rem;
+    }
+
+    .hero-list{
+      margin:0 0 16px;
+      padding-left:18px;
+      color:#dce8ff;
+    }
+
+    .hero-list li{
+      margin-bottom:8px;
     }
 
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
       gap:12px;
+      margin-top:22px;
     }
 
     .btn{
@@ -153,16 +195,60 @@
     }
 
     .hero-card{
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,248,237,.12);
+      border:1px solid rgba(255,244,230,.18);
       border-radius:30px;
-      padding:24px;
+      padding:22px;
       box-shadow:var(--shadow);
+      position:sticky;
+      top:84px;
     }
 
     .hero-card h3{
       margin:0 0 14px;
       font-size:1.35rem;
+    }
+
+    .hero-image-wrap{
+      margin-bottom:18px;
+      background:rgba(255,248,237,.08);
+      border:1px solid rgba(255,244,230,.14);
+      border-radius:22px;
+      overflow:hidden;
+    }
+
+    .hero-image{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .hero-image-caption{
+      padding:12px 14px;
+      font-size:.94rem;
+      color:#fff4df;
+      background:rgba(92,67,48,.35);
+    }
+
+    .shape-gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:18px;
+      margin:24px 0 10px;
+    }
+
+    .image-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:25px;
+      box-shadow:var(--shadow);
+    }
+
+    .image-card img{
+      width:100%;
+      height:180px;
+      object-position:center;
     }
 
     .mini-grid{
@@ -172,7 +258,7 @@
     }
 
     .mini{
-      min-height:124px;
+      min-height:118px;
       border-radius:20px;
       background:rgba(255,255,255,.1);
       padding:16px;
@@ -184,7 +270,7 @@
     }
 
     .mini .symbol{
-      font-size:1.75rem;
+      font-size:1.7rem;
       font-weight:700;
       margin-bottom:8px;
     }
@@ -231,6 +317,7 @@
     .card p{
       margin:0;
       color:var(--muted);
+      overflow-wrap:anywhere;
     }
 
     .tag{
@@ -258,7 +345,7 @@
     }
 
     .panel{
-      background:#fff;
+      background:var(--card);
       border:1px solid var(--line);
       border-radius:26px;
       padding:24px;
@@ -271,7 +358,7 @@
     }
 
     .bullet{
-      background:#fff;
+      background:var(--card);
       border:1px solid var(--line);
       border-left:6px solid var(--amber);
       border-radius:18px;
@@ -313,7 +400,7 @@
 
     .table-wrap{
       overflow:auto;
-      background:#fff;
+      background:var(--card);
       border:1px solid var(--line);
       border-radius:24px;
       box-shadow:var(--shadow);
@@ -322,6 +409,7 @@
     table{
       width:100%;
       border-collapse:collapse;
+      min-width:720px;
     }
 
     th, td{
@@ -332,8 +420,8 @@
     }
 
     th{
-      background:#edf3ff;
-      color:#1d3f79;
+      background:#efe3cc;
+      color:#6e4f2d;
       font-size:.98rem;
     }
 
@@ -425,8 +513,8 @@
     .result-box{
       margin-top:20px;
       border-radius:18px;
-      background:#f8fafc;
-      border:1px dashed #9fb0c6;
+      background:#fbf5eb;
+      border:1px dashed #c4ae8d;
       padding:16px;
     }
 
@@ -483,21 +571,75 @@
         flex-direction:column;
         align-items:flex-start;
       }
+
+      .hero{
+        padding:60px 0 52px;
+      }
+
+      .hero-card{
+        position:static;
+        top:auto;
+      }
+
+      .hero-image{
+        height:280px;
+      }
     }
 
     @media (max-width: 640px){
+      .container{
+        width:min(var(--max), calc(100% - 20px));
+      }
+
       .mini-grid,
       .grid-3,
       .stats{
         grid-template-columns:1fr;
       }
 
-      .hero{
-        padding-top:58px;
+      .nav-links{
+        gap:8px;
+      }
+
+      .nav-links a{
+        padding:7px 10px;
+        font-size:.88rem;
       }
 
       section{
-        padding:54px 0;
+        padding:52px 0;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+        text-align:center;
+      }
+
+      .hero-card,
+      .panel,
+      .card{
+        padding:18px;
+      }
+
+      .hero-image{
+        height:220px;
+      }
+
+      .image-card img{
+        height:200px;
+      }
+
+      table{
+        min-width:620px;
+      }
+
+      th, td{
+        padding:12px 10px;
+        font-size:.94rem;
       }
     }
   </style>
@@ -513,7 +655,7 @@
         <a href="#trupat3d">Trupat 3D</a>
         <a href="#formula">Formula</a>
         <a href="#arkitektura">Arkitektura</a>
-        <a href="#interaktive">Llogaritesit</a>
+        <a href="#interaktive">Kalkulatoret</a>
         <a href="#perfundim">Perfundim</a>
       </div>
     </div>
@@ -521,10 +663,10 @@
 
   <header class="hero" id="hyrje">
     <div class="container hero-grid">
-      <div>
+      <div class="hero-text-block">
         <span class="badge">Punuar nga Kurt Babasi</span>
         <h1>Gjeometria ne Arkitekture</h1>
-        <p>
+        <p class="hero-intro hero-text-block">
           Gjeometria në arkitekturë është një element thelbësor që ndikon në mënyrën se si projektohen dhe ndërtohen hapësirat. Ajo nuk shërben vetëm për llogaritje, por edhe për të krijuar harmoni, bukuri dhe qëndrueshmëri në ndërtesa. Për ta kuptuar më mirë këtë temë, mund ta ndajmë në disa nëntema kryesore:
           Gjeometria si bazë e projektimit arkitektonik
           Në arkitekturë, çdo projekt fillon me forma dhe struktura gjeometrike. Arkitektët përdorin parime matematikore për të organizuar hapësirat dhe për të siguruar që ndërtesa të jetë funksionale dhe e qëndrueshme. Gjeometria ndihmon në planifikimin e çdo detaji, nga baza e ndërtesës deri te pjesët më të vogla të saj.
@@ -543,22 +685,22 @@
           Rëndësia e gjeometrisë në arkitekturë
           Në fund, gjeometria është ajo që lidh funksionalitetin me estetikën. Ajo ndihmon në krijimin e ndërtesave të sigurta, ekonomike dhe të bukura, duke e bërë një element të domosdoshëm në çdo projekt arkitektonik.
         </p>
-        <h2>Personazhe te shquar qe kane kontribuar:</h2>
-        </p>
-        🏛️ Vitruvius
-        Ai ishte një nga arkitektët më të hershëm që shkroi për lidhjen midis gjeometrisë dhe arkitekturës. Në veprën e tij “De Architectura”, ai shpjegon se ndërtesat duhet të kenë simetri dhe proporcione të sakta, të bazuara në trupin e njeriut. Idetë e tij ndikuan shumë në arkitekturën klasike dhe më vonë në Rilindje.
-        🎨 Leonardo da Vinci
-        Edhe pse i njohur si artist, ai studioi thellësisht gjeometrinë. Vizatim i tij i famshëm “Njeriu Vitruvian” tregon si trupi i njeriut përshtatet brenda formave gjeometrike si rrethi dhe katrori. Kjo ide përdoret në arkitekturë për të krijuar harmoni dhe balancë.
-        📐 Euclid
-        I quajtur “babai i gjeometrisë”, ai krijoi bazat e gjeometrisë me librin “Elements”. Edhe pse nuk ishte arkitekt, parimet e tij përdoren drejtpërdrejt në ndërtim, si këndet, linjat dhe format.
-        🏗️ Filippo Brunelleschi
-        Ai përdori gjeometrinë për të zgjidhur probleme të mëdha ndërtimi, si kupola e Katedrales së Firences. Ishte ndër të parët që përdori perspektivën lineare, një koncept gjeometrik shumë i rëndësishëm për projektimin dhe vizatimin arkitektonik.
-        🧠 Le Corbusier
-        Ai krijoi sistemin “Modulor”, që bazohet në proporcione gjeometrike dhe trupin e njeriut. Ky sistem përdoret për të projektuar ndërtesa moderne me përmasa të balancuara dhe funksionale.
-        📏 Andrea Palladio
-        Ai përdori shumë forma të thjeshta gjeometrike si katrori dhe rrethi në projektet e tij. Ndërtesat e tij janë shembuj perfekt të harmonisë dhe simetrisë.
-        <p>
-        <img src="image1.jpg"/>
+
+        <div class="hero-text-block">
+          <h2>Personazhe te shquar qe kane kontribuar</h2>
+          <p>🏛️ Vitruvius
+            Ai ishte një nga arkitektët më të hershëm që shkroi për lidhjen midis gjeometrisë dhe arkitekturës. Në veprën e tij “De Architectura”, ai shpjegon se ndërtesat duhet të kenë simetri dhe proporcione të sakta, të bazuara në trupin e njeriut. Idetë e tij ndikuan shumë në arkitekturën klasike dhe më vonë në Rilindje.
+            🎨 Leonardo da Vinci
+            Edhe pse i njohur si artist, ai studioi thellësisht gjeometrinë. Vizatim i tij i famshëm “Njeriu Vitruvian” tregon si trupi i njeriut përshtatet brenda formave gjeometrike si rrethi dhe katrori. Kjo ide përdoret në arkitekturë për të krijuar harmoni dhe balancë.
+            📐 Euclid
+            I quajtur “babai i gjeometrisë”, ai krijoi bazat e gjeometrisë me librin “Elements”. Edhe pse nuk ishte arkitekt, parimet e tij përdoren drejtpërdrejt në ndërtim, si këndet, linjat dhe format.
+            🏗️ Filippo Brunelleschi
+            Ai përdori gjeometrinë për të zgjidhur probleme të mëdha ndërtimi, si kupola e Katedrales së Firences. Ishte ndër të parët që përdori perspektivën lineare, një koncept gjeometrik shumë i rëndësishëm për projektimin dhe vizatimin arkitektonik.
+            🧠 Le Corbusier
+            Ai krijoi sistemin “Modulor”, që bazohet në proporcione gjeometrike dhe trupin e njeriut. Ky sistem përdoret për të projektuar ndërtesa moderne me përmasa të balancuara dhe funksionale.
+            📏 Andrea Palladio
+            Ai përdori shumë forma të thjeshta gjeometrike si katrori dhe rrethi në projektet e tij. Ndërtesat e tij janë shembuj perfekt të harmonisë dhe simetrisë.</p>
+        </div>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="#figurat2d">Shiko figurat</a>
@@ -566,7 +708,10 @@
         </div>
       </div>
 
-      <div class="hero-card">
+      <aside class="hero-card">
+        <div class="hero-image-wrap">
+          <img class="hero-image" src="image1.jpg" alt="Ilustrim i gjeometrise ne arkitekture" />
+        </div>
         <h3>Per cfare flet projekti?</h3>
         <div class="mini-grid">
           <div class="mini">
@@ -590,7 +735,7 @@
             <span>Shembuj, stabilitet, estetike</span>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   </header>
 
@@ -600,8 +745,7 @@
         <h2 class="section-title">Pse gjeometria eshte kaq e rendesishme?</h2>
         <p class="section-lead">
           Gjeometria nuk eshte vetem teori. Ajo ndihmon ne vizatim teknik, projektim, matje, ndarje hapesire,
-          llogaritje materialesh, qendrueshmeri strukturore dhe harmoni estetike. Nje ndertese e mire kerkon
-          saktesi matematikore po aq sa edhe ide krijuese.
+          llogaritje materialesh, qendrueshmeri strukturore dhe harmoni estetike.
         </p>
       </div>
 
@@ -635,44 +779,22 @@
       <div class="section-head">
         <h2 class="section-title">Elementet baze te gjeometrise</h2>
         <p class="section-lead">
-          Para se te flasim per figurat dhe trupat, duhet te kuptojme elementet themelore qe ndertojne gjithe
-          boten gjeometrike: pika, vijat, segmentet, rrezet, kendet, planin dhe hapesiren.
+          Para se te flasim per figurat dhe trupat, duhet te kuptojme elementet themelore qe ndertojne boten gjeometrike:
+          pika, vija, segmenti, rrezja, kendet, plani dhe hapesira.
         </p>
       </div>
 
       <div class="grid-3">
-        <div class="card">
-          <h3>Pika</h3>
-          <p>Pika tregon vetem pozicion dhe nuk ka gjatesi, gjeresi apo trashesi. Ajo shenohet shpesh me A, B, C.</p>
-        </div>
-        <div class="card">
-          <h3>Vija dhe segmenti</h3>
-          <p>Vija shtrihet pafund ne te dy drejtimet, ndersa segmenti ka dy skaje dhe gjatesi te caktuar.</p>
-        </div>
-        <div class="card">
-          <h3>Rrezja</h3>
-          <p>Rrezja ka nje pike fillimi dhe zgjatet pafund vetem ne nje drejtim.</p>
-        </div>
-        <div class="card">
-          <h3>Kendet</h3>
-          <p>Kend i mprehte, kend i drejte, kend i gjere, kend i shtrire dhe kend i plote jane bazike ne projektim.</p>
-        </div>
-        <div class="card">
-          <h3>Plani</h3>
-          <p>Plani eshte siperfaqe e sheshte dy-dimensionale ku paraqiten figurat 2D dhe planimetrite.</p>
-        </div>
-        <div class="card">
-          <h3>Hapesira</h3>
-          <p>Hapesira tre-dimensionale eshte ambienti ku shfaqen trupat gjeometrike dhe objektet reale.</p>
-        </div>
+        <div class="card"><h3>Pika</h3><p>Pika tregon vetem pozicion dhe nuk ka gjatesi, gjeresi apo trashesi.</p></div>
+        <div class="card"><h3>Vija dhe segmenti</h3><p>Vija shtrihet pafund, ndersa segmenti ka dy skaje dhe gjatesi te caktuar.</p></div>
+        <div class="card"><h3>Rrezja</h3><p>Rrezja ka nje pike fillimi dhe zgjatet pafund ne nje drejtim.</p></div>
+        <div class="card"><h3>Kendet</h3><p>Kend i mprehte, kend i drejte, kend i gjere, kend i shtrire dhe kend i plote.</p></div>
+        <div class="card"><h3>Plani</h3><p>Plani eshte siperfaqe e sheshte dy-dimensionale ku paraqiten figurat 2D.</p></div>
+        <div class="card"><h3>Hapesira</h3><p>Hapesira tre-dimensionale eshte ambienti ku paraqiten trupat gjeometrike.</p></div>
       </div>
 
       <div class="subsection">
         <h3>Klasifikimi i kendeve</h3>
-        <p>
-          Kendet jane shume te rendesishme ne arkitekture sepse percaktojne pjerresine e catise, hapjen e nje
-          strukture, pozicionin e shkalleve dhe kompozimin e fasades.
-        </p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -683,31 +805,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Kend i mprehte</td>
-                <td>Me i vogel se 90 grade</td>
-                <td>Shfaqet ne trekendesha, catite e pjerrta dhe forma dinamike.</td>
-              </tr>
-              <tr>
-                <td>Kend i drejte</td>
-                <td>Fiks 90 grade</td>
-                <td>Perdoret ne mure, dysheme, dritare, dyer dhe planimetri drejtkendore.</td>
-              </tr>
-              <tr>
-                <td>Kend i gjere</td>
-                <td>Me i madh se 90 grade dhe me i vogel se 180 grade</td>
-                <td>Shfaqet ne dizajn modern, kthesa dhe struktura jo standarde.</td>
-              </tr>
-              <tr>
-                <td>Kend i shtrire</td>
-                <td>180 grade</td>
-                <td>Lidhet me vijat e drejta dhe me vazhdimesine lineare.</td>
-              </tr>
-              <tr>
-                <td>Kend i plote</td>
-                <td>360 grade</td>
-                <td>Perdoret ne rrotullime, kupola rrethore dhe kompozime qendrore.</td>
-              </tr>
+              <tr><td>Kend i mprehte</td><td>Me i vogel se 90 grade</td><td>Catite e pjerrta dhe forma dinamike.</td></tr>
+              <tr><td>Kend i drejte</td><td>90 grade</td><td>Mure, dysheme, dritare, dyer dhe planimetri.</td></tr>
+              <tr><td>Kend i gjere</td><td>Me i madh se 90 grade</td><td>Dizajn modern dhe kthesa jo standarde.</td></tr>
+              <tr><td>Kend i shtrire</td><td>180 grade</td><td>Vija te drejta dhe vazhdimesi lineare.</td></tr>
+              <tr><td>Kend i plote</td><td>360 grade</td><td>Rrotullime dhe kompozime qendrore.</td></tr>
             </tbody>
           </table>
         </div>
@@ -718,248 +820,55 @@
   <section id="figurat2d">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Figurat gjeometrike 2D - katalog i zgjeruar</h2>
+        <h2 class="section-title">Figurat gjeometrike 2D</h2>
         <p class="section-lead">
-          Figurat 2D kane gjatesi dhe gjeresi, por jo trashesi. Ato perdoren ne planimetri, fasada, dekorime,
-          vizatime teknike dhe ndarje funksionale te hapesires. Me poshte jane llojet kryesore dhe me te njohura.
+          Figurat 2D kane gjatesi dhe gjeresi, por jo trashesi. Ato perdoren ne planimetri, fasada, dekorime dhe vizatime teknike.
         </p>
       </div>
 
+      <div class="shape-gallery">
+        <div class="image-card"><img src="trekendeshi.jpg" alt="Trekendeshi" /></div>
+        <div class="image-card"><img src="katrori.jpg" alt="Katrori" /></div>
+        <div class="image-card"><img src="drejtkendeshi.jpg" alt="Drejtkendeshi" /></div>
+        <div class="image-card"><img src="paralelogrami.jpg" alt="Paralelogrami" /></div>
+        <div class="image-card"><img src="rombi.jpg" alt="Rombi" /></div>
+        <div class="image-card"><img src="trapezoidi.jpg" alt="Trapezoidi" /></div>
+        <div class="image-card"><img src="rrethi.jpg" alt="Rrethi" /></div>
+      </div>
+
       <div class="subsection">
-        <h3>1. Trekendeshat</h3>
-        <p>
-          Trekendeshi eshte nje nga format me te rendesishme ne gjeometri dhe ne ndertim, sepse eshte shume i
-          qendrueshem. Ai klasifikohet sipas brinjeve dhe sipas kendeve.
-        </p>
+        <h3>Trekendeshat</h3>
         <div class="cards">
-          <article class="card">
-            <h3>Trekendesh i barabrinje</h3>
-            <p>Ka 3 brinje te barabarta dhe 3 kende prej 60 grade. Simetri e larte dhe pamje shume e rregullt.</p>
-            <div class="tag">A = (b x h) / 2</div>
-          </article>
-          <article class="card">
-            <h3>Trekendesh dybrinjesh</h3>
-            <p>Ka 2 brinje te barabarta. Perdoret shpesh ne forma dekorative dhe elemente fasade.</p>
-            <div class="tag">Dy brinje te njejta</div>
-          </article>
-          <article class="card">
-            <h3>Trekendesh i pabarabrinje</h3>
-            <p>Ka 3 brinje te ndryshme. Ofron larmi ne dizajn dhe ne ndarje jo standarde te hapesires.</p>
-            <div class="tag">3 brinje te ndryshme</div>
-          </article>
-          <article class="card">
-            <h3>Trekendesh kenddrejte</h3>
-            <p>Ka nje kend prej 90 grade. Eshte shume i rendesishem per Pitagoren, catite dhe matjet diagonale.</p>
-            <div class="tag">a^2 + b^2 = c^2</div>
-          </article>
-          <article class="card">
-            <h3>Trekendesh kendmprehte</h3>
-            <p>Te tre kendet jane me te vegjel se 90 grade. Jep pamje te mprehte dhe te ngritur.</p>
-            <div class="tag">Te tre kendet &lt; 90</div>
-          </article>
-          <article class="card">
-            <h3>Trekendesh kendgjere</h3>
-            <p>Ka nje kend me te madh se 90 grade. Perdoret ne disa kompozime moderne.</p>
-            <div class="tag">Nje kend &gt; 90</div>
-          </article>
+          <article class="card"><h3>Trekendeshi barabrinjes</h3><p>Ka 3 brinje te barabarta dhe 3 kende prej 60 grade.</p><div class="tag">A = (b x h) / 2</div></article>
+          <article class="card"><h3>Trekendeshi dybrinjeshem</h3><p>Ka 2 brinje te barabarta dhe perdoret ne forma dekorative.</p><div class="tag">Dy brinje te njejta</div></article>
+          <article class="card"><h3>Trekendesh i crregullt</h3><p>Ka 3 brinje te ndryshme dhe ofron larmi ne dizajn.</p><div class="tag">3 brinje te ndryshme</div></article>
+          <article class="card"><h3>Trekendesh kenddrejte</h3><p>Ka nje kend prej 90 grade dhe eshte i rendesishem per Pitagoren.</p><div class="tag">a^2 + b^2 = c^2</div></article>
+          <article class="card"><h3>Trekendesh kend-ngushte</h3><p>Te tre kendet jane me te vegjel se 90 grade.</p><div class="tag">Te tre kendet &lt; 90</div></article>
+          <article class="card"><h3>Trekendesh kendgjere</h3><p>Ka nje kend me te madh se 90 grade.</p><div class="tag">Nje kend &gt; 90</div></article>
         </div>
       </div>
 
       <div class="subsection">
-        <h3>2. Katerkendeshat</h3>
-        <p>
-          Katerkendeshat jane shume te perdorura ne arkitekture, sidomos ne mure, dritare, dysheme, pllaka,
-          mobilim, fasada dhe plane ndertimi.
-        </p>
+        <h3>Katerkendeshat</h3>
         <div class="cards">
-          <article class="card">
-            <h3>Katrori</h3>
-            <p>Ka 4 brinje te barabarta dhe 4 kende te drejta. Perdoret ne module, pllaka dhe kompozime simetrike.</p>
-            <div class="tag">A = a^2, P = 4a</div>
-          </article>
-          <article class="card">
-            <h3>Drejtkendeshi</h3>
-            <p>Ka 4 kende te drejta dhe brinje perballe te barabarta. Eshte forma me e zakonshme ne ndertesa.</p>
-            <div class="tag">A = a x b</div>
-          </article>
-          <article class="card">
-            <h3>Paralelogrami</h3>
-            <p>Ka dy pale brinjesh paralele. Jep levizje vizuale dhe perdoret ne fasada me ritem diagonal.</p>
-            <div class="tag">A = b x h</div>
-          </article>
-          <article class="card">
-            <h3>Rombi</h3>
-            <p>Ka 4 brinje te barabarta, por jo domosdoshmerisht kende te drejta. Shpesh perdoret ne motive dekorative.</p>
-            <div class="tag">A = (d1 x d2) / 2</div>
-          </article>
-          <article class="card">
-            <h3>Trapezi</h3>
-            <p>Ka nje pale brinjesh paralele. Eshte i dobishem ne prerje teknike dhe ne kompozime me pjerresi.</p>
-            <div class="tag">A = ((B + b) x h) / 2</div>
-          </article>
-          <article class="card">
-            <h3>Deltoidi</h3>
-            <p>Ka dy pale brinjesh fqinje te barabarta. Perdoret ne ornamente dhe kompozime simetrike.</p>
-            <div class="tag">Kite / deltoid</div>
-          </article>
+          <article class="card"><h3>Katrori</h3><p>Ka 4 brinje te barabarta dhe 4 kende te drejta.</p><div class="tag">A = a^2, P = 4a</div></article>
+          <article class="card"><h3>Drejtkendeshi</h3><p>Forma me e zakonshme ne ndertesa, dhoma dhe plane.</p><div class="tag">A = a x b</div></article>
+          <article class="card"><h3>Paralelogrami</h3><p>Ka dy pale brinjesh paralele dhe jep levizje vizuale.</p><div class="tag">A = b x h</div></article>
+          <article class="card"><h3>Rombi</h3><p>Ka 4 brinje te barabarta dhe shpesh perdoret ne motive dekorative.</p><div class="tag">A = (d1 x d2) / 2</div></article>
+          <article class="card"><h3>Trapezi</h3><p>Ka nje pale brinjesh paralele dhe eshte i dobishem ne prerje teknike.</p><div class="tag">A = ((B + b) x h) / 2</div></article>
+          <article class="card"><h3>Deltoidi</h3><p>Ka dy pale brinjesh fqinje te barabarta dhe jep simetri interesante.</p><div class="tag">Kite / deltoid</div></article>
         </div>
       </div>
 
       <div class="subsection">
-        <h3>3. Shumekendesha te rregullta dhe te parregullta</h3>
-        <p>
-          Shumekendeshi eshte figure me shume se 4 brinje. Ai mund te jete i rregullt, kur te gjitha brinjet dhe
-          kendet jane te barabarta, ose i parregullt, kur ato ndryshojne.
-        </p>
+        <h3>Shumekendeshat dhe figurat e lakuara</h3>
         <div class="cards">
-          <article class="card">
-            <h3>Pesekendeshi</h3>
-            <p>Ka 5 brinje. Versioni i rregullt ka simetri te bukur dhe lidhet shpesh me raportin e arte.</p>
-            <div class="tag">n = 5</div>
-          </article>
-          <article class="card">
-            <h3>Gjashtkendeshi</h3>
-            <p>Ka 6 brinje. Shume i rendesishem ne modele natyrore dhe ne rrjete modulare.</p>
-            <div class="tag">n = 6</div>
-          </article>
-          <article class="card">
-            <h3>Shtatkendeshi</h3>
-            <p>Ka 7 brinje. Me i rralle ne ndertim, por i dobishem per ilustruar shumekendeshat.</p>
-            <div class="tag">n = 7</div>
-          </article>
-          <article class="card">
-            <h3>Tetkendeshi</h3>
-            <p>Ka 8 brinje. Perdoret ne planimetri qendrore, kulla dhe dhoma me organizim ceremonial.</p>
-            <div class="tag">n = 8</div>
-          </article>
-          <article class="card">
-            <h3>Nentekendeshi</h3>
-            <p>Ka 9 brinje. Shfaqet me pak, por sherben per te treguar zgjerimin e familjes se shumekendesheve.</p>
-            <div class="tag">n = 9</div>
-          </article>
-          <article class="card">
-            <h3>Dhjetekendeshi</h3>
-            <p>Ka 10 brinje. Jep ritem elegant dhe mund te perdoret ne dizajn ornamental.</p>
-            <div class="tag">n = 10</div>
-          </article>
-        </div>
-      </div>
-
-      <div class="subsection">
-        <h3>4. Figurat me vije te lakuar</h3>
-        <p>
-          Keto forma japin butesi, rrjedhshmeri dhe ndjesi qendrore. Ne arkitekture perdoren ne kupola, atriume,
-          dritare, sheshe rrethore dhe elemente dekorative.
-        </p>
-        <div class="cards">
-          <article class="card">
-            <h3>Rrethi</h3>
-            <p>Te gjitha pikat kane te njejten largesi nga qendra. Jep simetri perfekte rrotulluese.</p>
-            <div class="tag">A = pi r^2, C = 2pi r</div>
-          </article>
-          <article class="card">
-            <h3>Gjysmerrethi</h3>
-            <p>Gjysma e nje rrethi. Perdoret ne harqe, nishe dhe hapje klasike.</p>
-            <div class="tag">A = (pi r^2) / 2</div>
-          </article>
-          <article class="card">
-            <h3>Elipsa</h3>
-            <p>Ngjan me rrethin, por ka dy boshte te ndryshem. Jep elegance dhe levizje organike.</p>
-            <div class="tag">A = pi a b</div>
-          </article>
-          <article class="card">
-            <h3>Sektori rrethor</h3>
-            <p>Eshte pjese e rrethit e kufizuar nga dy rreze dhe nje hark. Perdoret ne skema radiale.</p>
-            <div class="tag">Pjese e rrethit</div>
-          </article>
-          <article class="card">
-            <h3>Unaza rrethore</h3>
-            <p>Eshte zona mes dy rretheve bashkeqendrore. Shfaqet ne sheshe, kolona dhe ornamente.</p>
-            <div class="tag">Rrethe koncentrike</div>
-          </article>
-          <article class="card">
-            <h3>Harku</h3>
-            <p>Harku nuk eshte figure e plote me vete, por eshte pjese e rendesishme e gjeometrise dhe e arkitektures.</p>
-            <div class="tag">Kryesor ne ura dhe hyrje</div>
-          </article>
-        </div>
-      </div>
-
-      <div class="subsection">
-        <h3>Tabele permbledhese e figurave 2D</h3>
-        <p>
-          Tabela e meposhtme i rendit figurat me te rendesishme sipas brinjeve, kendeve dhe perdorimit.
-        </p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Figura</th>
-                <th>Brinje / anet</th>
-                <th>Kende</th>
-                <th>Formule kryesore</th>
-                <th>Perdorim tipik</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Trekendesh</td>
-                <td>3</td>
-                <td>Shuma 180 grade</td>
-                <td>A = (b x h) / 2</td>
-                <td>Catite, strukturat metalike, ura</td>
-              </tr>
-              <tr>
-                <td>Katror</td>
-                <td>4 te barabarta</td>
-                <td>4 kende te drejta</td>
-                <td>A = a^2</td>
-                <td>Pllaka, rrjete modulare, dritare</td>
-              </tr>
-              <tr>
-                <td>Drejtkendesh</td>
-                <td>4, perballe te barabarta</td>
-                <td>4 kende te drejta</td>
-                <td>A = a x b</td>
-                <td>Dhoma, dyer, ekrane, plane</td>
-              </tr>
-              <tr>
-                <td>Romb</td>
-                <td>4 te barabarta</td>
-                <td>Jo domosdoshmerisht 90 grade</td>
-                <td>A = (d1 x d2) / 2</td>
-                <td>Dekorime, modele fasade</td>
-              </tr>
-              <tr>
-                <td>Trapez</td>
-                <td>4</td>
-                <td>Te ndryshme</td>
-                <td>A = ((B + b) x h) / 2</td>
-                <td>Pjerresi, prerje teknike</td>
-              </tr>
-              <tr>
-                <td>Pesekendesh / gjashtekendesh / tetkendesh</td>
-                <td>5, 6, 8</td>
-                <td>Te shumta</td>
-                <td>Ndahen ne trekendesha per llogaritje</td>
-                <td>Planimetri speciale, ornamente</td>
-              </tr>
-              <tr>
-                <td>Rreth</td>
-                <td>Pa brinje te drejta</td>
-                <td>Nuk klasifikohet si shumekendesh</td>
-                <td>A = pi r^2</td>
-                <td>Kupola, sheshe qendrore, dritare</td>
-              </tr>
-              <tr>
-                <td>Elipse</td>
-                <td>E lakuar</td>
-                <td>Jo kendore</td>
-                <td>A = pi a b</td>
-                <td>Salla, atriume, motive fluide</td>
-              </tr>
-            </tbody>
-          </table>
+          <article class="card"><h3>Pesekendeshi</h3><p>Ka 5 brinje dhe lidhet shpesh me raportin e arte.</p><div class="tag">n = 5</div></article>
+          <article class="card"><h3>Gjashtkendeshi</h3><p>Ka 6 brinje dhe eshte i rendesishem ne rrjete modulare.</p><div class="tag">n = 6</div></article>
+          <article class="card"><h3>Tetkendeshi</h3><p>Perdoret ne planimetri qendrore dhe kulla.</p><div class="tag">n = 8</div></article>
+          <article class="card"><h3>Rrethi</h3><p>Jep simetri perfekte dhe perdoret ne kupola e dritare rrethore.</p><div class="tag">A = pi r^2, C = 2pi r</div></article>
+          <article class="card"><h3>Gjysmerrethi</h3><p>Perdoret ne harqe, nishe dhe hyrje klasike.</p><div class="tag">A = (pi r^2) / 2</div></article>
+          <article class="card"><h3>Elipsa</h3><p>Ka dy boshte dhe jep elegance ne kompozime arkitektonike.</p><div class="tag">A = pi a b</div></article>
         </div>
       </div>
     </div>
@@ -968,208 +877,56 @@
   <section id="trupat3d">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Trupat gjeometrike 3D - katalog i zgjeruar</h2>
+        <h2 class="section-title">Trupat gjeometrike 3D</h2>
         <p class="section-lead">
-          Trupat gjeometrike kane gjatesi, gjeresi dhe lartesi. Ne arkitekture ata ndihmojne ne kuptimin e vellimit,
-          organizimit te hapesires, mbulimit te sallave, modelimit te objekteve dhe llogaritjes se materialeve.
+          Trupat gjeometrike kane gjatesi, gjeresi dhe lartesi. Ne arkitekture ato ndihmojne ne kuptimin e vellimit,
+          organizimit te hapesires dhe llogaritjes se materialeve.
         </p>
       </div>
 
+      <div class="shape-gallery">
+        <div class="image-card"><img src="kubi.jpg" alt="Kubi" /></div>
+        <div class="image-card"><img src="kuboidi.jpg" alt="Kuboidi" /></div>
+        <div class="image-card"><img src="cilindri.jpg" alt="Cilindri" /></div>
+        <div class="image-card"><img src="koni.jpg" alt="Koni" /></div>
+        <div class="image-card"><img src="sfera.jpg" alt="Sfera" /></div>
+        <div class="image-card"><img src="piramida_trekendeshe.jpg" alt="Piramida trekendeshe" /></div>
+        <div class="image-card"><img src="piramide_katrore.jpg" alt="Piramide katrore" /></div>
+        <div class="image-card"><img src="piramida_pesekendore.jpg" alt="Piramida pesekendore" /></div>
+      </div>
+
       <div class="subsection">
-        <h3>1. Poliedrat kryesore</h3>
-        <p>
-          Poliedrat jane trupa me faqe te sheshta. Ata kane kulme, brinje dhe faqe, dhe jane shume te dobishem
-          ne modelim, struktura metalike dhe kompozime modulare.
-        </p>
+        <h3>Poliedrat kryesore</h3>
         <div class="cards">
-          <article class="card">
-            <h3>Kubi</h3>
-            <p>Ka 6 faqe katrore, 12 brinje dhe 8 kulme. Eshte modeli me i thjeshte i nje vellimi te rregullt.</p>
-            <div class="tag">V = a^3</div>
-          </article>
-          <article class="card">
-            <h3>Kuboidi</h3>
-            <p>Ka 6 faqe drejtkendore. Shumica e ndertesave reale i afrohen kesaj forme.</p>
-            <div class="tag">V = a x b x h</div>
-          </article>
-          <article class="card">
-            <h3>Tetraedri</h3>
-            <p>Ka 4 faqe trekendore. Eshte nje nga trupat me te qendrueshem ne modelim strukturor.</p>
-            <div class="tag">4 faqe</div>
-          </article>
-          <article class="card">
-            <h3>Oktaedri</h3>
-            <p>Ka 8 faqe trekendore. Perdoret ne modele gjeometrike dhe ne kompozime simetrike.</p>
-            <div class="tag">8 faqe</div>
-          </article>
-          <article class="card">
-            <h3>Dodekaedri</h3>
-            <p>Ka 12 faqe pesekendore. Shfaqet me shume ne modele teorike dhe dekorime gjeometrike.</p>
-            <div class="tag">12 faqe</div>
-          </article>
-          <article class="card">
-            <h3>Ikosaedri</h3>
-            <p>Ka 20 faqe trekendore. I rendesishem ne gjeometrine e trupave te rregullt.</p>
-            <div class="tag">20 faqe</div>
-          </article>
+          <article class="card"><h3>Kubi</h3><p>Ka 6 faqe katrore, 12 brinje dhe 8 kulme.</p><div class="tag">V = a^3</div></article>
+          <article class="card"><h3>Kuboidi</h3><p>Shumica e ndertesave reale i afrohen kesaj forme.</p><div class="tag">V = a x b x h</div></article>
+          <article class="card"><h3>Tetraedri</h3><p>Ka 4 faqe trekendore dhe qendrueshmeri te larte.</p><div class="tag">4 faqe</div></article>
+          <article class="card"><h3>Oktaedri</h3><p>Ka 8 faqe trekendore dhe simetri interesante.</p><div class="tag">8 faqe</div></article>
+          <article class="card"><h3>Dodekaedri</h3><p>Ka 12 faqe pesekendore dhe vlere teorike e dekorative.</p><div class="tag">12 faqe</div></article>
+          <article class="card"><h3>Ikosaedri</h3><p>Ka 20 faqe trekendore dhe eshte trup i rregullt.</p><div class="tag">20 faqe</div></article>
         </div>
       </div>
 
       <div class="subsection">
-        <h3>2. Prizmat dhe piramidat</h3>
-        <p>
-          Keta trupa jane shume te rendesishem ne shkollim dhe ne arkitekture sepse ndertohen lehtesisht nga baza
-          shumekendore dhe lartesia.
-        </p>
+        <h3>Prizmat dhe piramidat</h3>
         <div class="cards">
-          <article class="card">
-            <h3>Prizma trekendore</h3>
-            <p>Ka dy baza trekendore paralele. Perdoret ne mbulesa, korniza dhe volumetri lineare.</p>
-            <div class="tag">V = A e bazes x h</div>
-          </article>
-          <article class="card">
-            <h3>Prizma katerkendeshe</h3>
-            <p>Kur baza eshte katerkendesh, forma i afrohet kuboidit ose trupave te ngjashem.</p>
-            <div class="tag">Baza poligonale</div>
-          </article>
-          <article class="card">
-            <h3>Prizma pesekendeshe</h3>
-            <p>Ka baze pesekendore dhe mund te krijoje volum interesante ne planimetri speciale.</p>
-            <div class="tag">5 ane ne baze</div>
-          </article>
-          <article class="card">
-            <h3>Piramida trekendore</h3>
-            <p>Ka nje baze trekendore dhe faqet anesore takohen ne nje kulm te vetem.</p>
-            <div class="tag">V = (A e bazes x h) / 3</div>
-          </article>
-          <article class="card">
-            <h3>Piramida katerkendeshe</h3>
-            <p>Eshte forma klasike e piramidave monumentale dhe e kulmeve dekorative.</p>
-            <div class="tag">Baze katrore ose drejtkendore</div>
-          </article>
-          <article class="card">
-            <h3>Frustumi i piramides</h3>
-            <p>Krijohet kur maja pritet paralelisht me bazen. Perdoret ne disa objekte moderne dhe dekorative.</p>
-            <div class="tag">Piramide e prere</div>
-          </article>
+          <article class="card"><h3>Prizma trekendore</h3><p>Ka dy baza trekendore paralele dhe perdoret ne volumetri lineare.</p><div class="tag">V = A e bazes x h</div></article>
+          <article class="card"><h3>Prizma pesekendeshe</h3><p>Mund te krijoje volum interesante ne planimetri speciale.</p><div class="tag">5 ane ne baze</div></article>
+          <article class="card"><h3>Piramida trekendore</h3><p>Ka baze trekendore dhe nje kulm te vetem.</p><div class="tag">V = (A e bazes x h) / 3</div></article>
+          <article class="card"><h3>Piramida katerkendeshe</h3><p>Forma klasike e piramidave monumentale dhe kulmeve dekorative.</p><div class="tag">Baze katrore ose drejtkendore</div></article>
+          <article class="card"><h3>Frustumi i piramides</h3><p>Krijohet kur maja pritet paralelisht me bazen.</p><div class="tag">Piramide e prere</div></article>
+          <article class="card"><h3>Frustumi i konit</h3><p>Koni i prere perdoret ne forma tranzicioni dhe objekte dekorative.</p><div class="tag">Kon i prere</div></article>
         </div>
       </div>
 
       <div class="subsection">
-        <h3>3. Trupat me siperfaqe te lakuar</h3>
-        <p>
-          Keta trupa lidhen ngushte me arkitekturen monumentale, kupolat, kolonat, silot, rezervuaret dhe objektet
-          me forme te rrumbullaket.
-        </p>
+        <h3>Trupat me siperfaqe te lakuar</h3>
         <div class="cards">
-          <article class="card">
-            <h3>Cilindri</h3>
-            <p>Ka dy baza rrethore dhe nje siperfaqe anesore te lakuar. Shfaqet ne kolona, kulla dhe rezervuare.</p>
-            <div class="tag">V = pi r^2 h</div>
-          </article>
-          <article class="card">
-            <h3>Koni</h3>
-            <p>Ka nje baze rrethore dhe nje maje. Perdoret ne kulme, objekte simbolike dhe struktura dekorative.</p>
-            <div class="tag">V = (pi r^2 h) / 3</div>
-          </article>
-          <article class="card">
-            <h3>Frustumi i konit</h3>
-            <p>Koni i prere formon nje trup te dobishem per vazo, kulla dhe forma tranzicioni.</p>
-            <div class="tag">Kon i prere</div>
-          </article>
-          <article class="card">
-            <h3>Sfera</h3>
-            <p>Te gjitha pikat ne siperfaqe kane te njejten largesi nga qendra. Jep simetri maksimale.</p>
-            <div class="tag">V = (4/3)pi r^3</div>
-          </article>
-          <article class="card">
-            <h3>Hemisfera</h3>
-            <p>Eshte gjysma e nje sfere dhe perdoret shume ne kupola dhe mbulime qendrore.</p>
-            <div class="tag">Gjysme sfere</div>
-          </article>
-          <article class="card">
-            <h3>Tori</h3>
-            <p>Ngjan me forme unaze. Nuk eshte shume i zakonshem ne shkollen baze, por eshte suplementar dhe interesant.</p>
-            <div class="tag">Forme unazore 3D</div>
-          </article>
-        </div>
-      </div>
-
-      <div class="subsection">
-        <h3>Tabele permbledhese e trupave 3D</h3>
-        <p>
-          Kjo tabele tregon dallimet kryesore midis trupave sipas faqeve, kulmeve, brinjeve dhe formulave.
-        </p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Trupi</th>
-                <th>Faqe</th>
-                <th>Brinje</th>
-                <th>Kulme</th>
-                <th>Formula kryesore</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Kubi</td>
-                <td>6</td>
-                <td>12</td>
-                <td>8</td>
-                <td>V = a^3</td>
-              </tr>
-              <tr>
-                <td>Kuboidi</td>
-                <td>6</td>
-                <td>12</td>
-                <td>8</td>
-                <td>V = a x b x h</td>
-              </tr>
-              <tr>
-                <td>Prizma trekendore</td>
-                <td>5</td>
-                <td>9</td>
-                <td>6</td>
-                <td>V = A e bazes x h</td>
-              </tr>
-              <tr>
-                <td>Piramida katerkendeshe</td>
-                <td>5</td>
-                <td>8</td>
-                <td>5</td>
-                <td>V = (A e bazes x h) / 3</td>
-              </tr>
-              <tr>
-                <td>Cilindri</td>
-                <td>2 baza + 1 siperfaqe anesore</td>
-                <td>2 kufij rrethore</td>
-                <td>0</td>
-                <td>V = pi r^2 h</td>
-              </tr>
-              <tr>
-                <td>Koni</td>
-                <td>1 baze + 1 siperfaqe anesore</td>
-                <td>1 kufi rrethor</td>
-                <td>1</td>
-                <td>V = (pi r^2 h) / 3</td>
-              </tr>
-              <tr>
-                <td>Sfera</td>
-                <td>1 siperfaqe e lakuar</td>
-                <td>0</td>
-                <td>0</td>
-                <td>V = (4/3)pi r^3</td>
-              </tr>
-              <tr>
-                <td>Hemisfera</td>
-                <td>1 baze + 1 siperfaqe e lakuar</td>
-                <td>1 kufi rrethor</td>
-                <td>0</td>
-                <td>V = (2/3)pi r^3</td>
-              </tr>
-            </tbody>
-          </table>
+          <article class="card"><h3>Cilindri</h3><p>Perdoret ne kolona, kulla dhe rezervuare.</p><div class="tag">V = pi r^2 h</div></article>
+          <article class="card"><h3>Koni</h3><p>Shfaqet ne kulme dhe elemente simbolike.</p><div class="tag">V = (pi r^2 h) / 3</div></article>
+          <article class="card"><h3>Sfera</h3><p>Ka simetri maksimale sepse te gjitha pikat jane ne te njejten largesi nga qendra.</p><div class="tag">V = (4/3)pi r^3</div></article>
+          <article class="card"><h3>Hemisfera</h3><p>Gjysma e nje sfere dhe shume e rendesishme ne kupola.</p><div class="tag">Gjysme sfere</div></article>
+          <article class="card"><h3>Tori</h3><p>Ngjan me forme unaze dhe eshte suplementar e interesant.</p><div class="tag">Forme unazore 3D</div></article>
         </div>
       </div>
     </div>
@@ -1178,67 +935,43 @@
   <section id="formula">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Formula, rregulla dhe info suplementare</h2>
+        <h2 class="section-title">Formula dhe info suplementare</h2>
         <p class="section-lead">
-          Kjo pjese sherben si reference e shpejte per prezantim: siperfaqe, perimetra, volume,
-          simetri, diagonale, shuma kendesh dhe rregulla qe i lidhin figurat me trupat.
+          Kjo pjese sherben si reference e shpejte per prezantim: siperfaqe, perimetra, volume, simetri, diagonale dhe rregulla.
         </p>
       </div>
 
       <div class="grid-2">
         <div class="panel">
-          <h3>Formula kryesore per figurat 2D</h3>
+          <h3>Formula per figurat 2D</h3>
           <div class="formula-box"><strong>Trekendesh:</strong><br>A = (b x h) / 2</div>
           <div class="formula-box"><strong>Katror:</strong><br>A = a^2, P = 4a</div>
           <div class="formula-box"><strong>Drejtkendesh:</strong><br>A = a x b, P = 2(a + b)</div>
           <div class="formula-box"><strong>Romb:</strong><br>A = (d1 x d2) / 2</div>
           <div class="formula-box"><strong>Trapez:</strong><br>A = ((B + b) x h) / 2</div>
           <div class="formula-box"><strong>Rreth:</strong><br>A = pi r^2, C = 2pi r</div>
-          <div class="formula-box"><strong>Elipse:</strong><br>A = pi a b</div>
         </div>
 
         <div class="panel">
-          <h3>Formula kryesore per trupat 3D</h3>
+          <h3>Formula per trupat 3D</h3>
           <div class="formula-box"><strong>Kub:</strong><br>V = a^3, S = 6a^2</div>
           <div class="formula-box"><strong>Kuboid:</strong><br>V = a x b x h</div>
           <div class="formula-box"><strong>Prizem:</strong><br>V = A e bazes x h</div>
           <div class="formula-box"><strong>Piramide:</strong><br>V = (A e bazes x h) / 3</div>
           <div class="formula-box"><strong>Cilinder:</strong><br>V = pi r^2 h</div>
-          <div class="formula-box"><strong>Kon:</strong><br>V = (pi r^2 h) / 3</div>
           <div class="formula-box"><strong>Sfere:</strong><br>V = (4/3)pi r^3</div>
         </div>
       </div>
 
       <div class="subsection">
-        <h3>Informacione suplementare qe e bejne projektin me te forte</h3>
-        <p>
-          Kjo pjese mund te perdoret gjate prezantimit per te treguar thellesi, jo vetem listim figurash dhe trupash.
-        </p>
+        <h3>Informacione suplementare</h3>
         <div class="grid-3">
-          <div class="bullet">
-            <h4>Simetria</h4>
-            <p>Figura ose trupi eshte simetrik kur mund te ndahet ne pjese te barabarta. Simetria krijon rend dhe bukuri ne fasada.</p>
-          </div>
-          <div class="bullet">
-            <h4>Proporcioni</h4>
-            <p>Raporti i permasave ndikon drejtperdrejt ne estetike. Nje objekt me proporcione te mira duket i balancuar.</p>
-          </div>
-          <div class="bullet">
-            <h4>Raporti i arte</h4>
-            <p>Raporti i arte lidhet me kompozime harmonike dhe permendet shpesh ne art, arkitekture dhe dizajn.</p>
-          </div>
-          <div class="bullet">
-            <h4>Pitagora</h4>
-            <p>Teorema e Pitagores eshte jetike per diagonalet, catite e pjerrta, lartesite dhe matjet indirekte.</p>
-          </div>
-          <div class="bullet">
-            <h4>Euler per poliedrat</h4>
-            <p>Per shume poliedra vlen rregulli: Faqe + Kulme - Brinje = 2. Kjo eshte ide shume e mire suplementare.</p>
-          </div>
-          <div class="bullet">
-            <h4>Shuma e kendeve</h4>
-            <p>Ne nje shumekendesh me n ane, shuma e kendeve te brendshme jepet nga formula (n - 2) x 180 grade.</p>
-          </div>
+          <div class="bullet"><h4>Simetria</h4><p>Simetria krijon rend, ekuiliber dhe bukuri ne fasada dhe plane.</p></div>
+          <div class="bullet"><h4>Proporcioni</h4><p>Raporti i permasave ndikon drejtperdrejt ne estetike dhe funksion.</p></div>
+          <div class="bullet"><h4>Raporti i arte</h4><p>Permendet shpesh ne art, arkitekture dhe dizajn si raport harmonik.</p></div>
+          <div class="bullet"><h4>Pitagora</h4><p>Shume e rendesishme per diagonale, pjerresi catie dhe matje indirekte.</p></div>
+          <div class="bullet"><h4>Euler</h4><p>Per poliedrat shpesh vlen rregulli: Faqe + Kulme - Brinje = 2.</p></div>
+          <div class="bullet"><h4>Shuma e kendeve</h4><p>Ne shumekendesha, shuma e kendeve te brendshme jepet nga formula (n - 2) x 180.</p></div>
         </div>
       </div>
     </div>
@@ -1249,8 +982,7 @@
       <div class="section-head">
         <h2 class="section-title">Gjeometria ne arkitekture dhe ne jeten reale</h2>
         <p class="section-lead">
-          Ketu lidhen format matematikore me objekte konkrete. Kjo pjese e ben projektin me bindes sepse tregon
-          zbatimin e drejtperdrejte te teorise ne boten reale.
+          Ketu lidhen format matematikore me objekte konkrete. Kjo pjese e ben projektin me bindes sepse tregon zbatimin ne boten reale.
         </p>
       </div>
 
@@ -1259,37 +991,22 @@
         <ul>
           <li>Trekendeshi perdoret ne cati, skelete metalike dhe ura per shkak te stabilitetit.</li>
           <li>Drejtkendeshi dhe katrori perdoren ne planimetri, mure, dritare, pllaka dhe mobilim.</li>
-          <li>Rrethi, gjysmerrethi dhe harku shfaqen ne kupola, tunele, dritare rrethore dhe hyrje monumentale.</li>
+          <li>Rrethi, gjysmerrethi dhe harku shfaqen ne kupola, tunele dhe hyrje monumentale.</li>
           <li>Cilindri perdoret ne kolona, kulla, silot dhe rezervuare.</li>
           <li>Piramida dhe koni perdoren ne kulme dekorative dhe forma monumentale.</li>
           <li>Hemisfera perdoret ne kupola sportive, tempuj dhe salla qendrore.</li>
         </ul>
 
         <div class="stats">
-          <div class="stat">
-            <strong>2D</strong>
-            <span>Planimetri dhe vizatim teknik</span>
-          </div>
-          <div class="stat">
-            <strong>3D</strong>
-            <span>Volum dhe hapesire reale</span>
-          </div>
-          <div class="stat">
-            <strong>PI</strong>
-            <span>Kryesor per rrethat dhe kupolat</span>
-          </div>
-          <div class="stat">
-            <strong>PIT</strong>
-            <span>Diagonalet dhe pjerresia</span>
-          </div>
+          <div class="stat"><strong>2D</strong><span>Planimetri dhe vizatim teknik</span></div>
+          <div class="stat"><strong>3D</strong><span>Volum dhe hapesire reale</span></div>
+          <div class="stat"><strong>PI</strong><span>Kryesor per rrethat dhe kupolat</span></div>
+          <div class="stat"><strong>PIT</strong><span>Diagonalet dhe pjerresia</span></div>
         </div>
       </div>
 
       <div class="subsection">
         <h3>Shembuj reale nga bota e arkitektures</h3>
-        <p>
-          Keto shembuj mund t'i permendesh ne prezantim per ta bere projektin me konkret dhe me interesant.
-        </p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -1300,36 +1017,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Pantheoni ne Rome</td>
-                <td>Rreth, hemisfere, kupole</td>
-                <td>Tregon fuqine e formes qendrore dhe shperndarjen e mire te ngarkesave.</td>
-              </tr>
-              <tr>
-                <td>Kulla Eiffel</td>
-                <td>Trekendesha dhe rrjete metalike</td>
-                <td>Demonstron stabilitetin e trekendeshit ne struktura te larta.</td>
-              </tr>
-              <tr>
-                <td>Urat me hark</td>
-                <td>Hark, rreth, kompresion</td>
-                <td>Provojne se forma e duhur ndihmon ne mbajtjen e peshave te medha.</td>
-              </tr>
-              <tr>
-                <td>Rrokaqiejte moderne</td>
-                <td>Drejtkendesha dhe kuboid</td>
-                <td>Japin efikasitet ne planimetri dhe organizim vertikal.</td>
-              </tr>
-              <tr>
-                <td>Kupolat sportive</td>
-                <td>Hemisfera, panele trekendeshe</td>
-                <td>Kombinojne estetiken me mbulimin e hapesirave te medha pa shume kolona.</td>
-              </tr>
-              <tr>
-                <td>Kolonat klasike</td>
-                <td>Cilinder</td>
-                <td>Forma cilindrike siguron qartesi vizuale dhe mbeshtetje te forte.</td>
-              </tr>
+              <tr><td>Pantheoni ne Rome</td><td>Rreth, hemisfere, kupole</td><td>Tregon fuqine e formes qendrore dhe shperndarjen e ngarkesave.</td></tr>
+              <tr><td>Kulla Eiffel</td><td>Trekendesha dhe rrjete metalike</td><td>Demonstron stabilitetin e trekendeshit ne struktura te larta.</td></tr>
+              <tr><td>Urat me hark</td><td>Hark dhe kompresion</td><td>Forma e duhur ndihmon ne mbajtjen e peshave te medha.</td></tr>
+              <tr><td>Rrokaqiejte moderne</td><td>Drejtkendesha dhe kuboidi</td><td>Japin efikasitet ne planimetri dhe organizim vertikal.</td></tr>
+              <tr><td>Kupolat sportive</td><td>Hemisfera dhe panele trekendeshe</td><td>Kombinojne estetiken me mbulimin e hapesirave te medha.</td></tr>
+              <tr><td>Kolonat klasike</td><td>Cilinder</td><td>Forma cilindrike siguron qartesi vizuale dhe mbeshtetje te forte.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1340,10 +1033,9 @@
   <section id="interaktive">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Llogarites interaktive per prezantim</h2>
+        <h2 class="section-title">Kalkulatore interaktive per prezantim</h2>
         <p class="section-lead">
-          Keto forma interaktive e bejne prezantimin me aktiv. Mund te ndryshosh vlerat live dhe te tregosh
-          menjehere si ndryshojne siperfaqja, perimetri dhe vellimi.
+          Keto mjete e bejne prezantimin me aktiv. Mund te ndryshosh vlerat live dhe te tregosh si ndryshojne siperfaqja, perimetri dhe vellimi.
         </p>
       </div>
 
@@ -1432,26 +1124,15 @@
       <div class="section-head">
         <h2 class="section-title">Perfundim</h2>
         <p class="section-lead">
-          Gjeometria eshte nje gjuhe universale e formes, e struktures dhe e hapesires. Ne kete projekt u paraqiten
-          figurat gjeometrike me kryesore, trupat gjeometrike me te rendesishem, formulat, klasifikimet dhe zbatimet
-          e tyre ne arkitekture. Kjo tregon qarte se matematika nuk qendron vetem ne liber, por jeton ne cdo ndertese,
-          ure, kupole, dritare dhe plan urban.
+          Gjeometria eshte nje gjuhe universale e formes, e struktures dhe e hapesires. Ky projekt tregon qarte
+          se matematika nuk qendron vetem ne liber, por jeton ne cdo ndertese, ure, kupole dhe plan urban.
         </p>
       </div>
 
       <div class="cards">
-        <article class="card">
-          <h3>Cfare mesova</h3>
-          <p>Format 2D dhe trupat 3D jane baza e ndertimit, dizajnit, arkitektures dhe kuptimit te hapesires.</p>
-        </article>
-        <article class="card">
-          <h3>Pse ky projekt eshte i plote</h3>
-          <p>Ai perfshin konceptet baze, klasifikime, formula, tabela, shembuj reale dhe pjese interaktive.</p>
-        </article>
-        <article class="card">
-          <h3>Autori</h3>
-          <p>Ky projekt me titull "Gjeometria ne Arkitekture" eshte punuar nga Kurt Babasi.</p>
-        </article>
+        <article class="card"><h3>Cfare mesova</h3><p>Format 2D dhe trupat 3D jane baza e ndertimit, dizajnit dhe arkitektures.</p></article>
+        <article class="card"><h3>Pse ky projekt eshte i plote</h3><p>Perfshin konceptet baze, klasifikime, formula, tabela, shembuj reale dhe pjese interaktive.</p></article>
+        <article class="card"><h3>Autori</h3><p>Ky projekt me titull "Gjeometria ne Arkitekture" eshte punuar nga Kurt Babasi.</p></article>
       </div>
     </div>
   </section>
